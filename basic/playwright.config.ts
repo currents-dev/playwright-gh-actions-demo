@@ -1,15 +1,13 @@
-import {PlaywrightTestConfig, devices} from '@playwright/test';
+import { devices, PlaywrightTestConfig } from "@playwright/test";
 
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
 const config: PlaywrightTestConfig = {
-
   /* Maximum time one test can run for. */
   timeout: 30 * 1000,
 
   expect: {
-
     /**
      * Maximum time expect() should wait for the condition to be met.
      * For example in `await expect(locator).toHaveText();`
@@ -28,82 +26,83 @@ const config: PlaywrightTestConfig = {
 
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [
-    ['html'],
+    ["html", { outputFile: "test-results.json" }],
+    ["@currents/playwright"],
   ],
 
   // Run your local dev server before starting the tests:
   // https://playwright.dev/docs/test-advanced#launching-a-development-web-server-during-the-tests
   webServer: {
-    command: 'node ./server',
+    command: "node ./server",
     port: 4345,
     cwd: __dirname,
   },
 
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
-
     /* Maximum time each action such as `click()` can take. Defaults to 0 (no limit). */
     actionTimeout: 0,
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: 'on',
+    trace: "on",
+    video: "on",
+    screenshot: "on",
   },
 
   /* Configure projects for major browsers */
   projects: [
     {
-      name: 'chromium',
+      name: "chromium",
 
       /* Project-specific settings. */
       use: {
-        ...devices['Desktop Chrome'],
+        ...devices["Desktop Chrome"],
       },
     },
 
     {
-      name: 'firefox',
+      name: "firefox",
       use: {
-        ...devices['Desktop Firefox'],
+        ...devices["Desktop Firefox"],
       },
     },
-
     {
-      name: 'webkit',
+      name: "webkit",
       use: {
-        ...devices['Desktop Safari'],
+        ...devices["Desktop Safari"],
       },
     },
 
     /* Test against mobile viewports. */
     {
-      name: 'Mobile Chrome',
+      name: "Mobile Chrome",
       use: {
-        ...devices['Pixel 5'],
+        ...devices["Pixel 5"],
       },
     },
     {
-      name: 'MobileSafari',
+      name: "MobileSafari",
       use: {
-        ...devices['iPhone 12'],
+        ...devices["iPhone 12"],
       },
     },
 
     /* Test against branded browsers. */
-    // {
-    //   name: 'Microsoft Edge',
-    //   use: {
-    //     channel: 'msedge',
-    //   },
-    // },
-    // {
-    //   name: 'Google Chrome',
-    //   use: {
-    //     channel: 'chrome',
-    //   },
-    // },
+    {
+      name: "Microsoft Edge",
+      use: {
+        channel: "msedge",
+      },
+    },
+    {
+      name: "Google Chrome",
+      use: {
+        channel: "chrome",
+      },
+    },
   ],
 
   /* Folder for test artifacts such as screenshots, videos, traces, etc. */
-  // outputDir: 'test-results/'
+  outputDir: "test-results/",
 };
 export default config;
