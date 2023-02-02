@@ -1,0 +1,37 @@
+name: playwright-gh-actions-demo
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+jobs:
+  currentsTests:
+    name: "basic tests"
+    timeout-minutes: 60
+    runs-on: ubuntu-22.04
+    container: mcr.microsoft.com/playwright:v1.28.1-focal
+    env:
+      TESTGROUP: basic
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: main
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "18.x"
+
+      - name: Install dependencies
+        run: |
+          npm ci
+
+      - name: Run Tests
+        continue-on-error: false
+        run: |
+          npx playwright install        
+          npx pwc --ci-build-id $(date \"+%s\")
+        env:
+          CURRENTS_RECORD_KEY: ${{ secrets.CURRENTS_RECORD_KEY }}
+          CURRENTS_PROJECT_ID: ${{ secrets.CURRENTS_PROJECT_ID }}
+          CURRENTS_API_URL: ${{ secrets.CURRENTS_API_URL }}
