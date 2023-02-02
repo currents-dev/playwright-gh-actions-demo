@@ -26,7 +26,7 @@ jobs:
         continue-on-error: false
         run: |
           npx playwright install        
-          npx pwc --ci-build-id $(date \"+%s\")
+          npx pwc --ci-build-id "${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt }}"
         env:
           CURRENTS_RECORD_KEY: ${{ secrets.CURRENTS_RECORD_KEY }}
           CURRENTS_PROJECT_ID: ${{ secrets.CURRENTS_PROJECT_ID }}
