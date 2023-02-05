@@ -1,4 +1,4 @@
-name: playwright-gh-actions-demo
+name: e2e-tests
 on:
   workflow_dispatch:
   pull_request:
@@ -7,7 +7,7 @@ on:
     branches: [main]
 jobs:
   currentsTests:
-    name: "basic tests"
+    name: "E2E Tests"
     timeout-minutes: 60
     runs-on: ubuntu-22.04
     container: mcr.microsoft.com/playwright:v1.28.1-focal
