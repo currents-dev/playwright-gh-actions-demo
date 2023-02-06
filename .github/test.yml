@@ -21,7 +21,7 @@ jobs:
       - uses: actions/checkout@v3
         with:
           ref: main
-          
+
       - uses: actions/setup-node@v3
         with:
           node-version: "18.x"
@@ -59,7 +59,7 @@ jobs:
       - uses: actions/checkout@v3
         with:
           ref: main
-          
+
       - uses: actions/setup-node@v3
         with:
           node-version: "16.x"
@@ -102,7 +102,7 @@ jobs:
       - uses: actions/checkout@v3
         with:
           ref: main
-          
+
       - uses: actions/setup-node@v3
         with:
           node-version: "18.x"
@@ -138,7 +138,7 @@ jobs:
       - uses: actions/checkout@v3
         with:
           ref: main
-          
+
       - uses: actions/setup-node@v3
         with:
           node-version: "18.x"
@@ -178,7 +178,7 @@ jobs:
       - uses: actions/checkout@v3
         with:
           ref: main
-          
+
       - uses: actions/setup-node@v3
         with:
           node-version: "18.x"
@@ -215,7 +215,7 @@ jobs:
       - uses: actions/checkout@v3
         with:
           ref: main
-          
+
       - uses: actions/setup-node@v3
         with:
           node-version: "18.x"
@@ -258,7 +258,7 @@ jobs:
       - uses: actions/checkout@v3
         with:
           ref: main
-          
+
       - uses: actions/setup-node@v3
         with:
           node-version: "18.x"
@@ -298,7 +298,7 @@ jobs:
       - uses: actions/checkout@v3
         with:
           ref: main
-          
+
       - uses: actions/setup-node@v3
         with:
           node-version: "18.x"
@@ -339,7 +339,7 @@ jobs:
       - uses: actions/checkout@v3
         with:
           ref: main
-          
+
       - uses: actions/setup-node@v3
         with:
           node-version: "18.x"
@@ -378,7 +378,7 @@ jobs:
       - uses: actions/checkout@v3
         with:
           ref: main
-          
+
       - uses: actions/setup-node@v3
         with:
           node-version: "18.x"
@@ -455,7 +455,7 @@ jobs:
       - uses: actions/checkout@v3
         with:
           ref: main
-          
+
       - uses: actions/setup-node@v3
         with:
           node-version: "18.x"
@@ -493,7 +493,7 @@ jobs:
       - uses: actions/checkout@v3
         with:
           ref: main
-          
+
       - uses: actions/setup-node@v3
         with:
           node-version: "18.x"
@@ -515,40 +515,3 @@ jobs:
         with:
           name: ${{ env.TESTGROUP }}
           path: playwright-report
-
-  publishTestResults:
-    name: "Publish Test Results to to testresults.marcusfelling.com"
-    needs:
-      [
-        accessibilityTests,
-        androidTests,
-        basicTests,
-        chromeExtensionTests,
-        dragAndDropTests,
-        electronTests,
-        fixturesTests,
-        githubAPITests,
-        oauthTests,
-        performanceTests,
-        svgomgTests,
-        todomvcTests,
-        visualComparisonTests,
-      ]
-    runs-on: ubuntu-22.04
-    if: always()
-    steps:
-      - name: Download artifacts
-        uses: actions/download-artifact@v2
-        id: download
-
-      - name: Publish to GH Pages
-        if: always()
-        uses: peaceiris/actions-gh-pages@v3.7.3
-        with:
-          external_repository: MarcusFelling/demo.reports
-          publish_branch: main
-          personal_token: ${{ secrets.PERSONAL_TOKEN }}
-          publish_dir: ${{steps.download.outputs.download-path}}
-          keep_files: true
-          user_name: "github-actions[bot]"
-          user_email: "github-actions[bot]@users.noreply.github.com"

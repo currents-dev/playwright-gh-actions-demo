@@ -1,0 +1,42 @@
+name: demo.playwright
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+jobs:
+  basicTests:
+    strategy:
+      fail-fast: false
+      matrix:
+        # run 3 copies of the current job in parallel
+        shard: [1, 2, 3, 4, 5]
+    name: "PW tests"
+    timeout-minutes: 60
+    runs-on: ubuntu-22.04
+    container: mcr.microsoft.com/playwright:v1.28.1-focal
+    env:
+      TESTGROUP: basic
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: main
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "18.x"
+
+      - name: Install dependencies
+        run: |
+          npm ci
+
+      - name: Run ${{ env.TESTGROUP }} Tests
+        continue-on-error: false
+        working-directory: ${{ env.TESTGROUP }}
+        env:
+          CURRENTS_PROJECT_ID: 3BwCwz
+          CURRENTS_RECORD_KEY: ${{ secrets.CURRENTS_RECORD_KEY }}
+        run: |
+          npx playwright install 
+          HOME=/root npx pwc test --shard=${{ matrix.shard }}/${{ strategy.job-total }}
