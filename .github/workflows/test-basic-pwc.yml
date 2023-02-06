@@ -24,7 +24,9 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha }}
 
       # https://github.com/actions/runner-images/issues/6775
-      - run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+      - run: |
+          echo "$GITHUB_WORKSPACE"
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
 
       - uses: actions/setup-node@v3
         with:
@@ -38,8 +40,12 @@ jobs:
         continue-on-error: false
         working-directory: ${{ env.TESTGROUP }}
         env:
+          DEBUG: pwc,commit-info
           CURRENTS_PROJECT_ID: 3BwCwz
           CURRENTS_RECORD_KEY: ${{ secrets.CURRENTS_RECORD_KEY }}
         run: |
+          echo git config --global --add safe.directory $GITHUB_WORKSPACE
+          git config --global --add safe.directory $GITHUB_WORKSPACE
+          git config --global --add safe.directory $GITHUB_WORKSPACE/basic
           npx playwright install 
-          HOME=/root npx pwc --shard=${{ matrix.shard }}/${{ strategy.job-total }} --ci-build-id "${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt }}"
+          npx pwc --shard=${{ matrix.shard }}/${{ strategy.job-total }} --ci-build-id "${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt }}"
