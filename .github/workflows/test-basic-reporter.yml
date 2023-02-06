@@ -18,13 +18,15 @@ jobs:
     container: mcr.microsoft.com/playwright:v1.28.1-focal
     env:
       TESTGROUP: basic
-    environment:
-      name: basic
-      url: https://testresults.marcusfelling.com/${{ env.TESTGROUP }}
     steps:
       - uses: actions/checkout@v3
         with:
-          ref: main
+          ref: ${{ github.event.pull_request.head.sha }}
+
+      # https://github.com/actions/runner-images/issues/6775
+      - run: |
+          echo "$GITHUB_WORKSPACE"
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
 
       - uses: actions/setup-node@v3
         with:
@@ -39,8 +41,8 @@ jobs:
         working-directory: ${{ env.TESTGROUP }}
         env:
           CURRENTS_PROJECT_ID: 3BwCwz
-          # Currents record key is a GH secret
-          # CURRENTS_RECORD_KEY: xxx
+          CURRENTS_RECORD_KEY: ${{ secrets.CURRENTS_RECORD_KEY }}
+
         run: |
           npx playwright install 
-          HOME=/root npx playwright test --shard=${{ matrix.shard }}/${{ strategy.job-total }}
+          npx playwright test --shard=${{ matrix.shard }}/${{ strategy.job-total }} --ci-build-id "reporter-${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt }}"
