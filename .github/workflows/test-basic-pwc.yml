@@ -39,4 +39,4 @@ jobs:
           CURRENTS_RECORD_KEY: ${{ secrets.CURRENTS_RECORD_KEY }}
         run: |
           npx playwright install 
-          HOME=/root npx pwc test --shard=${{ matrix.shard }}/${{ strategy.job-total }}
+          HOME=/root npx pwc --shard=${{ matrix.shard }}/${{ strategy.job-total }} --ci-build-id "${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt }}"
