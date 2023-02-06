@@ -1,4 +1,4 @@
-name: demo.playwright
+name: demo.playwright.reporter
 on:
   workflow_dispatch:
   pull_request:
@@ -42,7 +42,7 @@ jobs:
         env:
           CURRENTS_PROJECT_ID: 3BwCwz
           CURRENTS_RECORD_KEY: ${{ secrets.CURRENTS_RECORD_KEY }}
-
+          CURRENTS_CI_BUILD_ID: reporter-${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt }}
         run: |
           npx playwright install 
-          npx playwright test --shard=${{ matrix.shard }}/${{ strategy.job-total }} --ci-build-id "reporter-${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt }}"
+          npx playwright test --shard=${{ matrix.shard }}/${{ strategy.job-total }}

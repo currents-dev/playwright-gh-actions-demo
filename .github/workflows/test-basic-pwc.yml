@@ -1,4 +1,4 @@
-name: demo.playwright
+name: demo.playwright.pwc
 on:
   workflow_dispatch:
   pull_request:
