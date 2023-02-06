@@ -45,21 +45,20 @@ const config: PlaywrightTestConfig = {
 
   /* Configure projects for major browsers */
   projects: [
-    // {
-    //   name: "chromium",
-
-    //   /* Project-specific settings. */
-    //   use: {
-    //     ...devices["Desktop Chrome"],
-    //   },
-    // },
-
     {
-      name: "firefox",
+      name: "chromium",
+
+      /* Project-specific settings. */
       use: {
-        ...devices["Desktop Firefox"],
+        ...devices["Desktop Chrome"],
       },
     },
+    // {
+    //   name: "firefox",
+    //   use: {
+    //     ...devices["Desktop Firefox"],
+    //   },
+    // },
     {
       name: "webkit",
       use: {
@@ -88,12 +87,12 @@ const config: PlaywrightTestConfig = {
         channel: "msedge",
       },
     },
-    {
-      name: "Google Chrome",
-      use: {
-        channel: "chrome",
-      },
-    },
+    // {
+    //   name: "Google Chrome",
+    //   use: {
+    //     channel: "chrome",
+    //   },
+    // },
   ],
 
   /* Folder for test artifacts such as screenshots, videos, traces, etc. */

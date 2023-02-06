@@ -45,4 +45,6 @@ jobs:
           CURRENTS_CI_BUILD_ID: reporter-${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt }}
         run: |
           npx playwright install 
+          npx playwright install msedge
+          npx playwright install chrome
           npx playwright test --shard=${{ matrix.shard }}/${{ strategy.job-total }} --config ./playwright.config.reporter.ts

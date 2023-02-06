@@ -35,6 +35,8 @@ jobs:
       - name: Install dependencies
         run: |
           npm ci
+          npx playwright install msedge
+          npx playwright install chrome
 
       - name: Run ${{ env.TESTGROUP }} Tests
         continue-on-error: false
@@ -44,4 +46,6 @@ jobs:
           CURRENTS_RECORD_KEY: ${{ secrets.CURRENTS_RECORD_KEY }}
         run: |
           npx playwright install 
+          npx playwright install msedge
+          npx playwright install chrome
           npx pwc --shard=${{ matrix.shard }}/${{ strategy.job-total }} --ci-build-id "${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt }}"
