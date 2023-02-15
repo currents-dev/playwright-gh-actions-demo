@@ -36,7 +36,7 @@ jobs:
         run: |
           npm ci
 
-      - name: Run ${{ env.TESTGROUP }} Tests
+      - name: Run Basic Tests
         continue-on-error: false
         working-directory: ${{ env.TESTGROUP }}
         env:
