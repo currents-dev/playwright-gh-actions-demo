@@ -11,12 +11,6 @@ const config: PlaywrightTestConfig = {
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 1 : undefined,
 
-  webServer: {
-    command: "node ./server",
-    port: 4345,
-    cwd: __dirname,
-  },
-
   use: {
     actionTimeout: 0,
     trace: "on",

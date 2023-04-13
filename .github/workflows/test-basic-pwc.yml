@@ -11,11 +11,11 @@ jobs:
       fail-fast: false
       matrix:
         # run 3 copies of the current job in parallel
-        shard: [1, 2, 3, 4, 5]
+        shard: [1, 2, 3]
     name: "PW tests"
     timeout-minutes: 60
     runs-on: ubuntu-22.04
-    container: mcr.microsoft.com/playwright:v1.28.1-focal
+    container: mcr.microsoft.com/playwright:latest
     env:
       TESTGROUP: basic
     steps:
@@ -38,7 +38,7 @@ jobs:
           npx playwright install msedge
           npx playwright install chrome
 
-      - name: Run ${{ env.TESTGROUP }} Tests
+      - name: Run Basic Tests
         continue-on-error: false
         working-directory: ${{ env.TESTGROUP }}
         env:
