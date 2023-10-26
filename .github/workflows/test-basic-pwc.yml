@@ -42,6 +42,7 @@ jobs:
         continue-on-error: false
         working-directory: ${{ env.TESTGROUP }}
         env:
+          DEBUG: currents*
           CURRENTS_API_URL: https://cy-staging.currents.dev
           CURRENTS_PROJECT_ID: ALbKIA
           CURRENTS_RECORD_KEY: ${{ secrets.CURRENTS_RECORD_KEY_STAGING }}
