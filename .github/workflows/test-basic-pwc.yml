@@ -11,7 +11,7 @@ jobs:
       fail-fast: false
       matrix:
         # run 3 copies of the current job in parallel
-        shard: [1, 2, 3]
+        shard: [1, 2, 3, 4, 5]
     name: "PW tests"
     timeout-minutes: 60
     runs-on: ubuntu-22.04
@@ -42,8 +42,9 @@ jobs:
         continue-on-error: false
         working-directory: ${{ env.TESTGROUP }}
         env:
-          CURRENTS_PROJECT_ID: 3BwCwz
-          CURRENTS_RECORD_KEY: ${{ secrets.CURRENTS_RECORD_KEY }}
+          CURRENTS_API_URL: https://cy-staging.currents.dev
+          CURRENTS_PROJECT_ID: ALbKIA
+          CURRENTS_RECORD_KEY: ${{ secrets.CURRENTS_RECORD_KEY_STAGING }}
         run: |
           npx playwright install 
           npx pwc --shard=${{ matrix.shard }}/${{ strategy.job-total }} --ci-build-id "${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt }}"
