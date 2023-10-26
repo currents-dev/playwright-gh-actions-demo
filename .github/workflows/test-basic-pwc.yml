@@ -37,6 +37,7 @@ jobs:
           npm ci
           npx playwright install msedge
           npx playwright install chrome
+          npx playwright install
 
       - name: Run Basic Tests
         continue-on-error: false
@@ -47,5 +48,4 @@ jobs:
           CURRENTS_PROJECT_ID: ALbKIA
           CURRENTS_RECORD_KEY: ${{ secrets.CURRENTS_RECORD_KEY_STAGING }}
         run: |
-          npx playwright install 
           npx pwc --shard=${{ matrix.shard }}/${{ strategy.job-total }} --ci-build-id "${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt }}"
