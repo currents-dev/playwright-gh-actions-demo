@@ -2,7 +2,16 @@
 
 This repository showcases running [Playwright](https://playwright.dev/) tests on GitHub Actions in parallel, while using [Currents](https://currents.dev) as the reporting dashboard.
 
-## Setup
+<p align="center">
+  <img width="830" src="https://static.currents.dev/currents-playwright-banner-gh.png" />
+</p>
+
+
+
+## Documentation
+
+- Playwright Features on Currents: https://currents.dev/playwright
+- Integration Documentation: https://currents.dev/readme/integration-with-playwright/currents-playwright
 
 The repo contains a few Playwright tests with one test that always fails (intentionally).
 
@@ -33,6 +42,18 @@ Currents will collect the following information:
 
 Here's how the results are being displayed in Currents dashboard (recorded on November 2023).
 
+
+https://github.com/currents-dev/playwright-gh-actions-demo/assets/1637928/3a95c8d5-a4c1-44a6-be59-24fefb79b354
+
+
+
 ### PR Comment and Git Commit Status
 
-Currents will add inline information to GitHub Pull Request with a comment containing run results summary and also git commit status check. Example: https://github.com/currents-dev/playwright-gh-actions-demo/pull/17
+Currents will add inline information to GitHub Pull Request. Example: https://github.com/currents-dev/playwright-gh-actions-demo/pull/17.
+
+ - a comment containing run results summary
+![gh-actions-comment](https://github.com/currents-dev/playwright-gh-actions-demo/assets/1637928/6e9c11d3-8f92-4e2c-a70d-391bc04d2d52)
+
+
+ - git commit status check
+![gh-actions-status](https://github.com/currents-dev/playwright-gh-actions-demo/assets/1637928/d2a54c2d-befa-42d6-ac0a-96cbd387fc53)
