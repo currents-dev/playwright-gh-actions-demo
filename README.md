@@ -55,5 +55,5 @@ Currents will add inline information to GitHub Pull Request. Example: https://gi
 ![gh-actions-comment](https://github.com/currents-dev/playwright-gh-actions-demo/assets/1637928/6e9c11d3-8f92-4e2c-a70d-391bc04d2d52)
 
 
- - git commit status check
+ - git commit status check for each detected project
 ![gh-actions-status](https://github.com/currents-dev/playwright-gh-actions-demo/assets/1637928/d2a54c2d-befa-42d6-ac0a-96cbd387fc53)
