@@ -1,4 +1,4 @@
-name: demo.playwright.pwc
+name: demo.playwright.pwc.staging
 on:
   workflow_dispatch:
   pull_request:
@@ -43,7 +43,9 @@ jobs:
         continue-on-error: false
         working-directory: ${{ env.TESTGROUP }}
         env:
-          CURRENTS_PROJECT_ID: bnsqNa
-          CURRENTS_RECORD_KEY: ${{ secrets.CURRENTS_RECORD_KEY }}
+          DEBUG: currents*
+          CURRENTS_API_URL: https://cy-staging.currents.dev
+          CURRENTS_PROJECT_ID: ALbKIA
+          CURRENTS_RECORD_KEY: ${{ secrets.CURRENTS_RECORD_KEY_STAGING }}
         run: |
           npx pwc --shard=${{ matrix.shard }}/${{ strategy.job-total }} --ci-build-id "${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt }}"
