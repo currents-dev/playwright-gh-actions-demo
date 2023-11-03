@@ -5,7 +5,7 @@ import { expect, test } from "@playwright/test";
  * specific HTTP response. This response contains a JSON body where we assert
  * some properties.
  */
-test("flaky", async ({ page }, testInfo) => {
+test("flaky @tagC", async ({ page }, testInfo) => {
   await page.goto("/network.html");
   const [response] = await Promise.all([
     page.waitForResponse("/api/v1/users.json"),

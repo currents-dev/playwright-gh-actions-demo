@@ -1,4 +1,4 @@
-name: demo.playwright.reporter
+name: demo.playwright.pwc.staging
 on:
   workflow_dispatch:
   pull_request:
@@ -12,11 +12,12 @@ jobs:
       matrix:
         # run 3 copies of the current job in parallel
         shard: [1, 2, 3]
-    name: "Playwright Tests - Reporter"
+    name: "PW tests"
     timeout-minutes: 60
     runs-on: ubuntu-22.04
-    container: mcr.microsoft.com/playwright:v1.28.1-focal
-
+    container: mcr.microsoft.com/playwright:latest
+    env:
+      TESTGROUP: basic
     steps:
       - uses: actions/checkout@v3
         with:
@@ -34,14 +35,17 @@ jobs:
       - name: Install dependencies
         run: |
           npm ci
+          npx playwright install msedge
+          npx playwright install chrome
+          npx playwright install
 
       - name: Run Basic Tests
         continue-on-error: false
-        working-directory: ./basic
+        working-directory: ${{ env.TESTGROUP }}
         env:
-          CURRENTS_PROJECT_ID: 3BwCwz
-          CURRENTS_RECORD_KEY: ${{ secrets.CURRENTS_RECORD_KEY }}
-          CURRENTS_CI_BUILD_ID: reporter-${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt }}
+          DEBUG: currents*
+          CURRENTS_API_URL: https://cy-staging.currents.dev
+          CURRENTS_PROJECT_ID: ALbKIA
+          CURRENTS_RECORD_KEY: ${{ secrets.CURRENTS_RECORD_KEY_STAGING }}
         run: |
-          npx playwright install 
-          npx playwright test --shard=${{ matrix.shard }}/${{ strategy.job-total }} --config ./playwright.config.reporter.ts
+          npx pwc --shard=${{ matrix.shard }}/${{ strategy.job-total }} --ci-build-id "${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt }}"

@@ -7,7 +7,7 @@ test("basic test @basic", async ({ page }) => {
   const inputBox = page.locator("input.new-todo");
   const todoList = page.locator(".todo-list");
 
-  await inputBox.fill("Learn Playwright");
+  await inputBox.fill("Stop using Cypress");
   await inputBox.press("Enter");
   await expect(todoList).toHaveText("Learn Playwright");
 });
