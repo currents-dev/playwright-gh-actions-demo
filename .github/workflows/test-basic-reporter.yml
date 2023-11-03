@@ -11,13 +11,12 @@ jobs:
       fail-fast: false
       matrix:
         # run 3 copies of the current job in parallel
-        shard: [1, 2, 3, 4, 5]
-    name: "PW tests"
+        shard: [1, 2, 3]
+    name: "Playwright Tests - Reporter"
     timeout-minutes: 60
     runs-on: ubuntu-22.04
     container: mcr.microsoft.com/playwright:v1.28.1-focal
-    env:
-      TESTGROUP: basic
+
     steps:
       - uses: actions/checkout@v3
         with:
@@ -38,7 +37,7 @@ jobs:
 
       - name: Run Basic Tests
         continue-on-error: false
-        working-directory: ${{ env.TESTGROUP }}
+        working-directory: ./basic
         env:
           CURRENTS_PROJECT_ID: 3BwCwz
           CURRENTS_RECORD_KEY: ${{ secrets.CURRENTS_RECORD_KEY }}
