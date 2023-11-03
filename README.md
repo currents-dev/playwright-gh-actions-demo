@@ -10,7 +10,10 @@ This repository showcases running [Playwright](https://playwright.dev/) tests on
 
 The repo contains a few Playwright tests with one test that always fails (intentionally). The example configuration files use [Matrix Execution Strategy](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstrategymatrix) to run 3 containers for parallelization.
 
-Create an organization, get your **Record Key** and **project Id** on https://app.currents.dev and set [GitHub secret variable](https://docs.github.com/en/actions/reference/encrypted-secrets) `CURRENTS_RECORD_KEY`
+To reproduce the setup:
+
+- Create an organization, get your **Record Key** and **project Id** at https://app.currents.dev
+- Set [GitHub secret variable](https://docs.github.com/en/actions/reference/encrypted-secrets) `CURRENTS_RECORD_KEY`.
 
 See the example GH Actions configuration:
 
