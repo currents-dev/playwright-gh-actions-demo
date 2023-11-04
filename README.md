@@ -12,7 +12,7 @@ The repo contains a few Playwright tests with one test that always fails (intent
 
 To reproduce the setup:
 
-- Create an organization, get your **Record Key** and **project Id** at https://app.currents.dev
+- Create an organization, get your **Record Key** and **Project Id** at https://app.currents.dev
 - Set [GitHub secret variable](https://docs.github.com/en/actions/reference/encrypted-secrets) `CURRENTS_RECORD_KEY`.
 
 See the example GH Actions configuration:
