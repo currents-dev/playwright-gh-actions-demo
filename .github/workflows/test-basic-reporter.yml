@@ -39,6 +39,7 @@ jobs:
         continue-on-error: false
         working-directory: ./basic
         env:
+          CURRENTS_DEBUG: remote
           CURRENTS_PROJECT_ID: 3BwCwz
           CURRENTS_RECORD_KEY: ${{ secrets.CURRENTS_RECORD_KEY }}
           CURRENTS_CI_BUILD_ID: reporter-${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt }}

@@ -46,4 +46,4 @@ jobs:
           CURRENTS_PROJECT_ID: bnsqNa
           CURRENTS_RECORD_KEY: ${{ secrets.CURRENTS_RECORD_KEY }}
         run: |
-          npx pwc --shard=${{ matrix.shard }}/${{ strategy.job-total }}
+          npx pwc --pwc-debug=remote --shard=${{ matrix.shard }}/${{ strategy.job-total }}
