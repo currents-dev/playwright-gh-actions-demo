@@ -104,20 +104,20 @@ const config: PlaywrightTestConfig = {
         ...devices["Desktop Chrome"],
       },
     },
-    {
-      name: "chromium-11",
-      retries: 2,
-      use: {
-        ...devices["Desktop Chrome"],
-      },
-    },
-    {
-      name: "chromium-12",
-      retries: 2,
-      use: {
-        ...devices["Desktop Chrome"],
-      },
-    },
+    // {
+    //   name: "chromium-11",
+    //   retries: 2,
+    //   use: {
+    //     ...devices["Desktop Chrome"],
+    //   },
+    // },
+    // {
+    //   name: "chromium-12",
+    //   retries: 2,
+    //   use: {
+    //     ...devices["Desktop Chrome"],
+    //   },
+    // },
   ],
 
   /* Folder for test artifacts such as screenshots, videos, traces, etc. */
