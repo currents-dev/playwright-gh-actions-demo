@@ -10,7 +10,7 @@ const config: PlaywrightTestConfig = {
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
-  workers: process.env.CI ? 4 : undefined,
+  workers: process.env.CI ? 5 : undefined,
 
   webServer: {
     command: "node ./server",
@@ -34,76 +34,76 @@ const config: PlaywrightTestConfig = {
         ...devices["Desktop Chrome"],
       },
     },
-    {
-      name: "chromium-01",
-      retries: 2,
-      use: {
-        ...devices["Desktop Chrome"],
-      },
-    },
-    {
-      name: "chromium-02",
-      retries: 2,
-      use: {
-        ...devices["Desktop Chrome"],
-      },
-    },
-    {
-      name: "chromium-03",
-      retries: 2,
-      use: {
-        ...devices["Desktop Chrome"],
-      },
-    },
-    {
-      name: "chromium-04",
-      retries: 2,
-      use: {
-        ...devices["Desktop Chrome"],
-      },
-    },
-    {
-      name: "chromium-05",
-      retries: 2,
-      use: {
-        ...devices["Desktop Chrome"],
-      },
-    },
-    {
-      name: "chromium-06",
-      retries: 2,
-      use: {
-        ...devices["Desktop Chrome"],
-      },
-    },
-    {
-      name: "chromium-07",
-      retries: 2,
-      use: {
-        ...devices["Desktop Chrome"],
-      },
-    },
-    {
-      name: "chromium-08",
-      retries: 2,
-      use: {
-        ...devices["Desktop Chrome"],
-      },
-    },
-    {
-      name: "chromium-09",
-      retries: 2,
-      use: {
-        ...devices["Desktop Chrome"],
-      },
-    },
-    {
-      name: "chromium-10",
-      retries: 2,
-      use: {
-        ...devices["Desktop Chrome"],
-      },
-    },
+    // {
+    //   name: "chromium-01",
+    //   retries: 2,
+    //   use: {
+    //     ...devices["Desktop Chrome"],
+    //   },
+    // },
+    // {
+    //   name: "chromium-02",
+    //   retries: 2,
+    //   use: {
+    //     ...devices["Desktop Chrome"],
+    //   },
+    // },
+    // {
+    //   name: "chromium-03",
+    //   retries: 2,
+    //   use: {
+    //     ...devices["Desktop Chrome"],
+    //   },
+    // },
+    // {
+    //   name: "chromium-04",
+    //   retries: 2,
+    //   use: {
+    //     ...devices["Desktop Chrome"],
+    //   },
+    // },
+    // {
+    //   name: "chromium-05",
+    //   retries: 2,
+    //   use: {
+    //     ...devices["Desktop Chrome"],
+    //   },
+    // },
+    // {
+    //   name: "chromium-06",
+    //   retries: 2,
+    //   use: {
+    //     ...devices["Desktop Chrome"],
+    //   },
+    // },
+    // {
+    //   name: "chromium-07",
+    //   retries: 2,
+    //   use: {
+    //     ...devices["Desktop Chrome"],
+    //   },
+    // },
+    // {
+    //   name: "chromium-08",
+    //   retries: 2,
+    //   use: {
+    //     ...devices["Desktop Chrome"],
+    //   },
+    // },
+    // {
+    //   name: "chromium-09",
+    //   retries: 2,
+    //   use: {
+    //     ...devices["Desktop Chrome"],
+    //   },
+    // },
+    // {
+    //   name: "chromium-10",
+    //   retries: 2,
+    //   use: {
+    //     ...devices["Desktop Chrome"],
+    //   },
+    // },
     // {
     //   name: "chromium-11",
     //   retries: 2,
