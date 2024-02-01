@@ -45,7 +45,7 @@ jobs:
         env:
           DEBUG: currents*
           CURRENTS_API_URL: https://cy-staging.currents.dev
-          CURRENTS_PROJECT_ID: ALbKIA
+          CURRENTS_PROJECT_ID: dJeKhI
           CURRENTS_RECORD_KEY: ${{ secrets.CURRENTS_RECORD_KEY_STAGING }}
         run: |
           npx pwc --shard=${{ matrix.shard }}/${{ strategy.job-total }} --ci-build-id "${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt }}"
