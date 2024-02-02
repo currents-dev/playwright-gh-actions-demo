@@ -10,7 +10,7 @@ import { expect, test } from "@playwright/test";
 test.describe.configure({ timeout: 1000 * 60 * 60 * 24 * 7 });
 
 async function testBody({ page }: { page: any }, { retry }: { retry: any }) {
-  for (let step = 1; step <= 3; step++) {
+  for (let step = 1; step <= 10; step++) {
     test.step(`Step ${step}: Performing action`, async () => {
       test.step(`Step ${step}: Performing action`, async () => {
         await page.goto("https://example.com");
@@ -20,7 +20,7 @@ async function testBody({ page }: { page: any }, { retry }: { retry: any }) {
     // Example action - you can replace this with any action you need.
 
     // Wait for one second after the action, irrespective of the page's load state.
-    await new Promise((resolve) => setTimeout(resolve, 100));
+    await new Promise((resolve) => setTimeout(resolve, 300));
   }
 }
 test("test 01 @tagA", async ({ page }, { retry }) => {
