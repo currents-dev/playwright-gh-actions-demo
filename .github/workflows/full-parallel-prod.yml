@@ -1,4 +1,4 @@
-name: demo.playwright.pwc.staging
+name: demo.playwright.pwc.prod
 on:
   workflow_dispatch:
   pull_request:
