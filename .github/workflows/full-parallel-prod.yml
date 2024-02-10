@@ -57,7 +57,6 @@ jobs:
       - name: Install dependencies
         run: |
           npm ci
-          npx playwright install msedge
           npx playwright install chrome
           npx playwright install
 
@@ -66,8 +65,8 @@ jobs:
         working-directory: ${{ env.TESTGROUP }}
         env:
           # DEBUG: currents*
-          CURRENTS_API_URL: https://cy-staging.currents.dev
-          CURRENTS_PROJECT_ID: dJeKhI
-          CURRENTS_RECORD_KEY: ${{ secrets.CURRENTS_RECORD_KEY_STAGING }}
+
+          CURRENTS_PROJECT_ID: RdXO5y
+          CURRENTS_RECORD_KEY: ${{ secrets.CURRENTS_RECORD_KEY }}
         run: |
           npx pwc --shard=${{ matrix.shard }}/${{ strategy.job-total }} --ci-build-id "${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt }}"
