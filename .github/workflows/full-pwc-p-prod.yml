@@ -64,7 +64,7 @@ jobs:
         working-directory: ${{ env.TESTGROUP }}
         env:
           # DEBUG: currents*
-          CURRENTS_PROJECT_ID: RdXO5y
+          CURRENTS_PROJECT_ID: b9HXbb
           CURRENTS_RECORD_KEY: ${{ secrets.CURRENTS_RECORD_KEY }}
         run: |
           npx pwc-p --ci-build-id "${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt }}"
