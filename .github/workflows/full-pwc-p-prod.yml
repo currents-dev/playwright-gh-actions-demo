@@ -1,4 +1,4 @@
-name: demo.playwright.pwc.prod
+name: demo.playwright.pwc-p.prod
 on:
   workflow_dispatch:
   pull_request:
@@ -58,15 +58,13 @@ jobs:
         run: |
           npm ci
           npx playwright install chrome
-          npx playwright install
 
-      - name: Run Basic Tests
+      - name: Run pwc-p
         continue-on-error: false
         working-directory: ${{ env.TESTGROUP }}
         env:
           # DEBUG: currents*
-
           CURRENTS_PROJECT_ID: RdXO5y
           CURRENTS_RECORD_KEY: ${{ secrets.CURRENTS_RECORD_KEY }}
         run: |
-          npx pwc --shard=${{ matrix.shard }}/${{ strategy.job-total }} --ci-build-id "${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt }}"
+          npx pwc-p --ci-build-id "${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt }}"
