@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 
 test("basic test @basic", async ({ page }) => {
-  await page.goto("https://todomvc.com/examples/vanilla-es6/");
+  await page.goto("https://todomvc.com/examples/backbone/dist/");
 
   // Use locators to represent a selector and re-use them
   const inputBox = page.locator("input.new-todo");
