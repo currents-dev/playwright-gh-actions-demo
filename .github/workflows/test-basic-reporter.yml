@@ -40,10 +40,8 @@ jobs:
         continue-on-error: false
         working-directory: ./basic
         env:
-          CURRENTS_DEBUG: remote
           CURRENTS_PROJECT_ID: bnsqNa
           CURRENTS_RECORD_KEY: ${{ secrets.CURRENTS_RECORD_KEY }}
           CURRENTS_CI_BUILD_ID: reporter-${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt }}
         run: |
-          npx playwright install 
           npx playwright test --shard=${{ matrix.shard }}/${{ strategy.job-total }} --config ./playwright.config.reporter.ts
