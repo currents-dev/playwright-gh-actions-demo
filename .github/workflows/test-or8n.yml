@@ -1,4 +1,4 @@
-name: demo.playwright.pwc
+name: demo.playwright.pwc-p
 on:
   workflow_dispatch:
   pull_request:
@@ -11,9 +11,9 @@ jobs:
       fail-fast: false
       matrix:
         # run 3 copies of the job in parallel
-        shard: [1, 2, 3]
+        shard: [1, 2, 3, 4, 5]
 
-    name: "Playwright Tests - pwc"
+    name: "Playwright Tests - pwc-p"
     timeout-minutes: 60
     runs-on: ubuntu-22.04
     container: mcr.microsoft.com/playwright:latest
@@ -37,20 +37,11 @@ jobs:
           npm ci
           npx playwright install chrome
 
-      - name: Run Project A
+      - name: Run Orchestrated tests
         continue-on-error: false
         working-directory: ./basic
         env:
           CURRENTS_PROJECT_ID: bnsqNa
           CURRENTS_RECORD_KEY: ${{ secrets.CURRENTS_RECORD_KEY }}
         run: |
-          npx pwc --project a --shard=${{ matrix.shard }}/${{ strategy.job-total }}
-
-      - name: Run Project B
-        continue-on-error: false
-        working-directory: ./basic
-        env:
-          CURRENTS_PROJECT_ID: bnsqNa
-          CURRENTS_RECORD_KEY: ${{ secrets.CURRENTS_RECORD_KEY }}
-        run: |
-          npx pwc --project  --shard=${{ matrix.shard }}/${{ strategy.job-total }}
+          npx pwc-p

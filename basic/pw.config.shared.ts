@@ -27,7 +27,14 @@ const config: PlaywrightTestConfig = {
 
   projects: [
     {
-      name: "chromium",
+      name: "a",
+      retries: 2,
+      use: {
+        ...devices["Desktop Chrome"],
+      },
+    },
+    {
+      name: "b",
       retries: 2,
       use: {
         ...devices["Desktop Chrome"],
