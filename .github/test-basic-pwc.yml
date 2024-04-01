@@ -19,7 +19,7 @@ jobs:
     container: mcr.microsoft.com/playwright:latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           ref: ${{ github.event.pull_request.head.sha }}
 
@@ -28,22 +28,29 @@ jobs:
           echo "$GITHUB_WORKSPACE"
           git config --global --add safe.directory "$GITHUB_WORKSPACE"
 
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
           node-version: "18.x"
 
       - name: Install dependencies
         run: |
           npm ci
-          npx playwright install msedge
           npx playwright install chrome
-          npx playwright install
 
-      - name: Run Basic Tests
+      - name: Run Project A
         continue-on-error: false
         working-directory: ./basic
         env:
           CURRENTS_PROJECT_ID: bnsqNa
           CURRENTS_RECORD_KEY: ${{ secrets.CURRENTS_RECORD_KEY }}
         run: |
-          npx pwc --shard=${{ matrix.shard }}/${{ strategy.job-total }}
+          npx pwc --project a --shard=${{ matrix.shard }}/${{ strategy.job-total }}
+
+      - name: Run Project B
+        continue-on-error: false
+        working-directory: ./basic
+        env:
+          CURRENTS_PROJECT_ID: bnsqNa
+          CURRENTS_RECORD_KEY: ${{ secrets.CURRENTS_RECORD_KEY }}
+        run: |
+          npx pwc --project  --shard=${{ matrix.shard }}/${{ strategy.job-total }}

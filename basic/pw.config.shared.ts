@@ -13,8 +13,9 @@ const config: PlaywrightTestConfig = {
 
   webServer: {
     command: "node ./server",
-    port: 4345,
+    port: 4346,
     cwd: __dirname,
+    reuseExistingServer: true,
   },
 
   use: {
@@ -26,7 +27,14 @@ const config: PlaywrightTestConfig = {
 
   projects: [
     {
-      name: "chromium",
+      name: "a",
+      retries: 2,
+      use: {
+        ...devices["Desktop Chrome"],
+      },
+    },
+    {
+      name: "b",
       retries: 2,
       use: {
         ...devices["Desktop Chrome"],
