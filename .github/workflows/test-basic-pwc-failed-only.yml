@@ -1,0 +1,157 @@
+# Demonstrates a workflow that initially runs the previously failed tests
+## Consists of 3 jobs: previousFailedFirst, fullRun, recordFailedTests
+##
+## previousFailedFirst - downloads previous failures for the branch, if there are any, it runs those failures using a matrix
+## fullRun - only runs if previousFailedFirst if there were no failed test, or all failed tests now pass
+## recordFailedTests - merges and saves tests output from the previous jobs if one of them failed
+##
+## When running playwright, the `blob` reporter is being used to produce artifacts, this produces report output that can be merged later.
+## In the recordFailedTests job, `playwright merge-reports` is used to bring all the reports together (so we have all the failures),
+## and produces a summary.json file using an additional community reporter that includes a failure array that we can pass back into the test later.
+
+name: demo.playwright.pwc-failed
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [main]
+jobs:
+  previousFailedFirst:
+    strategy:
+      fail-fast: false
+      matrix:
+        # run 3 copies of the job in parallel
+        shard: [1, 2, 3]
+    name: "Playwright Tests - check failed"
+    timeout-minutes: 60
+    runs-on: ubuntu-22.04
+    container: mcr.microsoft.com/playwright:latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+
+      - uses: dawidd6/action-download-artifact@v6
+        with:
+          workflow: test-basic-pwc-failed-only.yml
+          workflow_conclusion: failure
+          branch: ${{github.head_ref}}
+          name: failure-report
+          path: failures
+          if_no_artifact_found: ignore
+      # capture whether we have failures. The rest of the steps will use a condition to skip if hasFailures isn't set.
+      - id: download-failures
+        continue-on-error: true
+        run: |
+          head failures/summary.json && echo "hasFailures=true\n" >> $GITHUB_OUTPUT
+
+      - uses: actions/setup-node@v4
+        if: ${{ success() && steps.download-failures.outputs.hasFailures == 'true' }}
+        with:
+          node-version: "18.x"
+
+      # Also install jq here, as we use it to parse our failures out of our summary file
+      - name: Install dependencies
+        if: ${{ success() && steps.download-failures.outputs.hasFailures == 'true' }}
+        run: |
+          npm ci
+          apt update
+          apt install -y jq
+          npx playwright install chrome
+          npx playwright install
+
+      # Run only the failed tests by passing them in to the command once we extract them from the summary.json
+      - name: Run Failed Tests
+        if: ${{ success() && steps.download-failures.outputs.hasFailures == 'true' }}
+        continue-on-error: false
+        working-directory: ./basic
+        env:
+          CURRENTS_PROJECT_ID: bnsqNa
+          CURRENTS_RECORD_KEY: ${{ secrets.CURRENTS_RECORD_KEY }}
+          CURRENTS_CI_BUILD_ID: failed-${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt }}
+          PWTEST_BLOB_DO_NOT_REMOVE: 1 # Only needed if using pwc-p
+        run: |
+          npx pwc --shard=${{ matrix.shard }}/${{ strategy.job-total }} --reporter blob $(cat ../failures/summary.json | jq -r '.failed[]' | tr '\n' ' ')
+
+      - name: Upload blob reports as artifacts.
+        uses: actions/upload-artifact@v4
+        if: ${{ failure() && steps.download-failures.outputs.hasFailures == 'true' }}
+        with:
+          name: blobReports-${{ matrix.shard }}
+          path: blob-report
+          retention-days: 1
+  # Only run fullRun if the previous job passed
+  fullRun:
+    if: 'success()'
+    needs: previousFailedFirst
+    strategy:
+      fail-fast: false
+      matrix:
+        # run 3 copies of the job in parallel
+        shard: [1, 2, 3]
+    name: "Playwright Tests - run basic tests"
+    timeout-minutes: 60
+    runs-on: ubuntu-22.04
+    container: mcr.microsoft.com/playwright:latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "18.x"
+
+      - name: Install dependencies
+        run: |
+          npm ci
+          npx playwright install chrome
+          npx playwright install
+
+      - name: Run All Test
+        continue-on-error: false
+        working-directory: ./basic
+        env:
+          CURRENTS_PROJECT_ID: bnsqNa
+          CURRENTS_RECORD_KEY: ${{ secrets.CURRENTS_RECORD_KEY }}
+          CURRENTS_CI_BUILD_ID: all-${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt }}
+          PWTEST_BLOB_DO_NOT_REMOVE: 1 # Only needed if using pwc-p
+        run: |
+          npx pwc --shard=${{ matrix.shard }}/${{ strategy.job-total }} --reporter blob
+
+      - name: Upload blob reports as artifacts.
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: blobReports-${{ matrix.shard }}
+          path: blob-report
+          retention-days: 1
+  # Record a summary of errors on job failure
+  recordFailedTests:
+    if: 'failure()'
+    needs: [previousFailedFirst, fullRun]
+    runs-on: ubuntu-22.04
+    container: mcr.microsoft.com/playwright:latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 18
+    - name: Install dependencies
+      run: | 
+        npm ci
+        # Add a summary reporter
+        npm install @butchmayhew/playwright-json-summary-reporter --save-dev
+    - name: Download Blobs
+      uses: actions/download-artifact@v4
+      with:
+        path: all-blob-reports
+        pattern: blobReports-*
+        merge-multiple: true
+    - name: Merge into JSON Report
+      run: npx playwright merge-reports --reporter @butchmayhew/playwright-json-summary-reporter ./all-blob-reports
+    - name: Upload JSON report
+      uses: actions/upload-artifact@v4
+      with:
+        name: failure-report
+        path: summary.json
+        retention-days: 14
