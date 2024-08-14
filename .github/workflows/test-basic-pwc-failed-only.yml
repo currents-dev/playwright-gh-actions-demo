@@ -1,13 +1,19 @@
 # Demonstrates a workflow that initially runs the previously failed tests
 ## Consists of 3 jobs: previousFailedFirst, fullRun, recordFailedTests
-##
+#
+# GitHub Action Job Details
 ## previousFailedFirst - downloads previous failures for the branch, if there are any, it runs those failures using a matrix
-## fullRun - only runs if previousFailedFirst if there were no failed test, or all failed tests now pass
-## recordFailedTests - merges and saves tests output from the previous jobs if one of them failed
+## * uses action `dawidd6/action-download-artifact` to find the completed run for the current pr source branch. (can be changes to commit/pr/run_id)
 ##
+## fullRun - only runs if there were no failed test, or all failed tests now pass (uses GitHub actions if conditions)
+##
+## recordFailedTests - merges and saves tests output from the previous jobs if one of them failed
+## * produces a summary.json file using an `@butchmayhew/playwright-json-summary-reporter` reporter that includes a failure array.
+## * `playwright merge-reports` is used to bring all the reports together (so we have all the failures)
+#
+# Playwright details
 ## When running playwright, the `blob` reporter is being used to produce artifacts, this produces report output that can be merged later.
-## In the recordFailedTests job, `playwright merge-reports` is used to bring all the reports together (so we have all the failures),
-## and produces a summary.json file using an additional community reporter that includes a failure array that we can pass back into the test later.
+##
 
 name: demo.playwright.pwc-failed
 on:
@@ -33,7 +39,7 @@ jobs:
       - uses: dawidd6/action-download-artifact@v6
         with:
           workflow: test-basic-pwc-failed-only.yml
-          workflow_conclusion: failure
+          workflow_conclusion: completed
           branch: ${{github.head_ref}}
           name: failure-report
           path: failures
@@ -57,7 +63,6 @@ jobs:
           apt update
           apt install -y jq
           npx playwright install chrome
-          npx playwright install
 
       # Run only the failed tests by passing them in to the command once we extract them from the summary.json
       - name: Run Failed Tests
@@ -105,7 +110,6 @@ jobs:
         run: |
           npm ci
           npx playwright install chrome
-          npx playwright install
 
       - name: Run All Test
         continue-on-error: false
