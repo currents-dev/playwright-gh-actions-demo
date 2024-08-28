@@ -41,16 +41,14 @@ jobs:
         continue-on-error: false
         working-directory: ./basic
         env:
+          ARGOS_TOKEN: ${{ secrets.ARGOS_TOKEN }}
+          ARGOS_PARALLEL: "true"
+          ARGOS_PARALLEL_NONCE: reporter-${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt }}
+          ARGOS_PARALLEL_TOTAL: "7" # Needs to be the total number of upload calls across builds
           CURRENTS_PROJECT_ID: bnsqNa
           CURRENTS_RECORD_KEY: ${{ secrets.CURRENTS_RECORD_KEY }}
           CURRENTS_CI_BUILD_ID: reporter-${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt }}
           COMMIT_INFO_MESSAGE: "pwc-p: ${{ github.event.head_commit.message }}"
           PWTEST_BLOB_DO_NOT_REMOVE: 1 # Add the env variable to not remove test blobs
-        # Add the blob reporter in the execution command
         run: |
-          npx pwc-p --reporter blob
-
-      # Generate a report based on the blob with the merge-report command
-      - name: Generate HTML report from blob
-        run: |
-          npx playwright merge-reports --reporter=html ./blob-report
+          npx pwc-p --pwc-skip-reporter-injection -c ./playwright.config.argo.js
