@@ -51,4 +51,4 @@ jobs:
           COMMIT_INFO_MESSAGE: "pwc-p: ${{ github.event.head_commit.message }}"
           PWTEST_BLOB_DO_NOT_REMOVE: 1 # Add the env variable to not remove test blobs
         run: |
-          npx pwc-p --pwc-skip-reporter-injection -c ./playwright.config.argo.js
+          npx pwc-p --pwc-skip-reporter-injection -c ./playwright.config.argos.js
