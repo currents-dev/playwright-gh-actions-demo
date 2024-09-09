@@ -24,13 +24,6 @@ const config: PlaywrightTestConfig = {
     ],
   ],
 
-  webServer: {
-    command: "node ./server",
-    port: 4346,
-    cwd: __dirname,
-    reuseExistingServer: true,
-  },
-
   use: {
     actionTimeout: 0,
     trace: "on",
