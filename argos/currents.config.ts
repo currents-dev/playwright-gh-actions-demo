@@ -9,8 +9,12 @@ function assertEnvVariable(name: string) {
 }
 
 async function onFinish(status: OrchestrationStatus) {
-  const upload = await $`npx argos upload ./screenshots`;
-  console.log(upload.stderr + "\n");
+  try {
+    const upload = await $`npx argos upload ./screenshots`;
+    console.log(upload.stderr + "\n");
+  } catch (e) {
+    console.error(e);
+  }
 
   if (status.specs.completed === status.specs.overall) {
     try {
