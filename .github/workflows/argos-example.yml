@@ -1,0 +1,46 @@
+name: demo.playwright.pwc-p.argos
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+jobs:
+  basicTests:
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [1, 2, 3]
+    name: "PW tests"
+    timeout-minutes: 60
+    runs-on: ubuntu-22.04
+    container: mcr.microsoft.com/playwright:latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+
+      # https://github.com/actions/runner-images/issues/6775
+      - run: |
+          echo "$GITHUB_WORKSPACE"
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20.x"
+
+      - name: Install dependencies
+        run: |
+          npm ci
+          npx playwright install chrome
+
+      - name: Run Argos
+        env:
+          ARGOS_PARALLEL: 1
+          ARGOS_PARALLEL_TOTAL: -1
+          ARGOS_TOKEN: ${{ secrets.ARGOS_TOKEN }}
+          CURRENTS_PROJECT_ID: bnsqNa
+          CURRENTS_RECORD_KEY: ${{ secrets.CURRENTS_RECORD_KEY }}
+        run: |
+          npx pwc-p
