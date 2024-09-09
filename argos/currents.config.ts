@@ -26,6 +26,7 @@ async function onFinish(status: OrchestrationStatus) {
 const config: CurrentsConfig = {
   recordKey: assertEnvVariable("CURRENTS_RECORD_KEY"),
   projectId: assertEnvVariable("CURRENTS_PROJECT_ID"),
+  ciBuildId: `${process.env.GITHUB_RUN_ID}-${process.env.GITHUB_RUN_ATTEMPT}`,
   orchestration: {
     skipReporterInjection: true,
     onFinish,
