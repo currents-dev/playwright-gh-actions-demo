@@ -36,6 +36,7 @@ jobs:
           npx playwright install chrome
 
       - name: Run Argos
+        working-directory: ./argos
         env:
           ARGOS_PARALLEL: 1
           ARGOS_PARALLEL_TOTAL: -1
