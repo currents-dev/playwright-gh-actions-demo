@@ -43,6 +43,5 @@ jobs:
           ARGOS_TOKEN: ${{ secrets.ARGOS_TOKEN }}
           CURRENTS_PROJECT_ID: bnsqNa
           CURRENTS_RECORD_KEY: ${{ secrets.CURRENTS_RECORD_KEY }}
-          DEBUG: "argos:*,currents:*"
         run: |
-          npx pwc-p --pwc-debug
+          npx pwc-p
