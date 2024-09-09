@@ -10,7 +10,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        shard: [1]
+        shard: [1, 2, 3]
     name: "PW tests"
     timeout-minutes: 60
     runs-on: ubuntu-22.04
