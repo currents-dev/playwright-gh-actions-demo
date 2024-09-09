@@ -10,8 +10,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@argos-ci/playwright": "^3.5.0",
-    "@playwright/test": "^1.43.0",
+    "@playwright/test": "1.46.1",
     "@types/express": "^4.17.13",
     "@typescript-eslint/eslint-plugin": "^5.22.0",
     "@typescript-eslint/parser": "^5.22.0",
