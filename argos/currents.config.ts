@@ -9,12 +9,12 @@ function assertEnvVariable(name: string) {
 }
 
 async function onFinish(status: OrchestrationStatus) {
+  const upload = await $`npx argos upload ./screenshots`;
+  console.log(upload.stderr + "\n");
+
   if (status.specs.completed === status.specs.overall) {
     try {
-      const upload = await $`npx argos upload ./screenshots`;
       const finalize = await $`npx argos finalize`;
-
-      console.log(upload.stderr + "\n");
       console.log(finalize.stderr);
     } catch (e) {
       console.error(e);
@@ -26,7 +26,6 @@ async function onFinish(status: OrchestrationStatus) {
 const config: CurrentsConfig = {
   recordKey: assertEnvVariable("CURRENTS_RECORD_KEY"),
   projectId: assertEnvVariable("CURRENTS_PROJECT_ID"),
-  ciBuildId: Date.now().toString(),
   orchestration: {
     skipReporterInjection: true,
     onFinish,
