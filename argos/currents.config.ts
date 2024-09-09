@@ -1,4 +1,5 @@
 import type { CurrentsConfig, OrchestrationStatus } from "@currents/playwright";
+import { $ } from "execa";
 
 function assertEnvVariable(name: string) {
   if (!process.env[name]) {
@@ -9,7 +10,15 @@ function assertEnvVariable(name: string) {
 
 async function onFinish(status: OrchestrationStatus) {
   if (status.specs.completed === status.specs.overall) {
-    console.log("All specs completed");
+    try {
+      const upload = await $`npx argos upload ./screenshots`;
+      const finalize = await $`npx argos finalize`;
+
+      console.log(upload.stderr + "\n");
+      console.log(finalize.stderr);
+    } catch (e) {
+      console.error(e);
+    }
     return;
   }
 }
