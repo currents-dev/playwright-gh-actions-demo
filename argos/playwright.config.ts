@@ -18,6 +18,9 @@ const config: PlaywrightTestConfig = {
     [
       // See https://argos-ci.com/docs/parallel-testing
       "@argos-ci/playwright/reporter",
+      {
+        uploadToArgos: true,
+      },
     ],
   ],
 
