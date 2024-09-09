@@ -35,7 +35,7 @@ jobs:
           npm ci
           npx playwright install chrome
 
-      - name: Run Argos
+      - name: Orchestrated PW + Argos
         working-directory: ./argos
         env:
           ARGOS_PARALLEL: 1
@@ -43,5 +43,6 @@ jobs:
           ARGOS_TOKEN: ${{ secrets.ARGOS_TOKEN }}
           CURRENTS_PROJECT_ID: bnsqNa
           CURRENTS_RECORD_KEY: ${{ secrets.CURRENTS_RECORD_KEY }}
+          DEBUG: "argos:*,currents:*"
         run: |
-          npx pwc-p
+          npx pwc-p --pwc-debug
