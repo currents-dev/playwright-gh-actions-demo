@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@argos-ci/cli": "^2.4.3",
+    "@argos-ci/playwright": "^3.6.1",
     "@axe-core/playwright": "^4.4.4",
     "@currents/playwright": "^1.6.0-beta.3",
     "express": "^4.17.2",
