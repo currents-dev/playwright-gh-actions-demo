@@ -1,0 +1,60 @@
+name: demo.playwright.failed-only-or8n
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test-or8n:
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [1, 2, 3]
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    container: mcr.microsoft.com/playwright:latest
+    env:
+      CURRENTS_PROJECT_ID: bnsqNa
+      CURRENTS_RECORD_KEY: ${{ secrets.CURRENTS_RECORD_KEY }}
+      CURRENTS_CI_BUILD_ID: or8n-${GITHUB_REPOSITORY}-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}
+      CURRENTS_API_URL: ${{ secrets.CURRENTS_API_URL }}
+      CURRENTS_API_KEY: ${{ secrets.CURRENTS_API_KEY }}
+      CURRENTS_REST_API_URL: ${{ secrets.CURRENTS_REST_API_URL }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
+
+      # https://github.com/actions/runner-images/issues/6775
+      - run: |
+          echo "$GITHUB_WORKSPACE"
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "18.x"
+
+      - name: Install dependencies
+        run: |
+          npm ci
+          npx playwright install chrome
+          npm install -g @currents/cmd@beta
+
+      - name: Resolve Playwright options
+        run: |
+          PREVIOUS_CI_BUILD_ID="or8n-${GITHUB_REPOSITORY}-${GITHUB_RUN_ID}-$((GITHUB_RUN_ATTEMPT - 1))"
+          EXTRA_PW_FLAGS=""
+
+          if [ ${{ github.run_attempt }} -gt 1 ]; then
+            if npx currents api get-run --pw-last-run --ci-build-id $PREVIOUS_CI_BUILD_ID --output basic/test-results/.last-run.json; then
+              EXTRA_PW_FLAGS="--last-failed"
+            fi
+          fi
+
+          echo "EXTRA_PW_FLAGS=$EXTRA_PW_FLAGS" >> $GITHUB_ENV
+
+      - name: Run Tests
+        working-directory: ./basic
+        run: |
+          COMMAND="npx pwc-p ${{ env.EXTRA_PW_FLAGS }}"
+          echo "Running command: $COMMAND"
+          eval $COMMAND

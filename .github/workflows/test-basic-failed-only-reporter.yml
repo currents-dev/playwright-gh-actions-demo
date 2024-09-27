@@ -1,0 +1,67 @@
+name: demo.playwright.failed-only-reporter
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test-reporter:
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [1, 2, 3]
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    container: mcr.microsoft.com/playwright:latest
+    env:
+      CURRENTS_PROJECT_ID: bnsqNa
+      CURRENTS_RECORD_KEY: ${{ secrets.CURRENTS_RECORD_KEY }}
+      CURRENTS_CI_BUILD_ID: reporter-${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt }}
+      CURRENTS_API_URL: ${{ secrets.CURRENTS_API_URL }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
+
+      # https://github.com/actions/runner-images/issues/6775
+      - run: |
+          echo "$GITHUB_WORKSPACE"
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "18.x"
+
+      - name: Install dependencies
+        run: |
+          npm ci
+          npx playwright install chrome
+          npm install -g @currents/cmd@beta
+
+      - name: Prepare environment & load last run from cache
+        env:
+          DEBUG: "currents,currents:*"
+        run: |
+          npx currents cache get \
+            --preset last-run \
+            --preset-output .preset_output \
+            --matrix-index ${{ matrix.shard }} \
+            --matrix-total ${{ strategy.job-total }}
+          echo "EXTRA_PW_FLAGS=$(cat .preset_output)" >> $GITHUB_ENV
+
+      - name: Run Tests
+        working-directory: ./basic
+        run: |
+          COMMAND="npx playwright test --config playwright.config.reporter.ts $EXTRA_PW_FLAGS"
+          echo "Running command: $COMMAND"
+          $COMMAND
+
+      - name: Cache the last run results
+        env:
+          DEBUG: "currents,currents:*"
+        if: ${{ always() }}
+        run: |
+          npx currents cache set \
+            --preset last-run \
+            --pw-output-dir basic/test-results \
+            --matrix-index ${{ matrix.shard }} \
+            --matrix-total ${{ strategy.job-total }}
