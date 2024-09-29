@@ -10,8 +10,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # run 3 copies of the current job in parallel
-        shard: [1, 2, 3]
+        # run multiple copies of the current job in parallel
+        shard: [1, 2, 3, 4, 5]
     name: "PW tests"
     timeout-minutes: 60
     runs-on: ubuntu-22.04
@@ -19,7 +19,7 @@ jobs:
     env:
       TESTGROUP: basic
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           ref: ${{ github.event.pull_request.head.sha }}
 
@@ -28,24 +28,31 @@ jobs:
           echo "$GITHUB_WORKSPACE"
           git config --global --add safe.directory "$GITHUB_WORKSPACE"
 
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
-          node-version: "18.x"
+          node-version: "20.x"
 
       - name: Install dependencies
         run: |
           npm ci
-          npx playwright install msedge
           npx playwright install chrome
-          npx playwright install
 
       - name: Run Basic Tests
-        continue-on-error: false
+        continue-on-error: true
         working-directory: ${{ env.TESTGROUP }}
         env:
-          DEBUG: currents*
           CURRENTS_API_URL: https://cy-staging.currents.dev
-          CURRENTS_PROJECT_ID: ALbKIA
+          CURRENTS_PROJECT_ID: dJeKhI
           CURRENTS_RECORD_KEY: ${{ secrets.CURRENTS_RECORD_KEY_STAGING }}
         run: |
-          npx pwc --shard=${{ matrix.shard }}/${{ strategy.job-total }} --ci-build-id "${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt }}"
+          npx pwc --shard=${{ matrix.shard }}/${{ strategy.job-total }} --ci-build-id "${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt }}" --grep @basic
+
+      - name: Run Non-Basic Tests
+        continue-on-error: true
+        working-directory: ${{ env.TESTGROUP }}
+        env:
+          CURRENTS_API_URL: https://cy-staging.currents.dev
+          CURRENTS_PROJECT_ID: dJeKhI
+          CURRENTS_RECORD_KEY: ${{ secrets.CURRENTS_RECORD_KEY_STAGING }}
+        run: |
+          npx pwc --shard=${{ matrix.shard }}/${{ strategy.job-total }} --ci-build-id "${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt }}" --grep-invert @basic

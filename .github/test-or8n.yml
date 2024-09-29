@@ -41,6 +41,7 @@ jobs:
         continue-on-error: false
         working-directory: ./basic
         env:
+          ARGOS_TOKEN: ${{ secrets.ARGOS_TOKEN }}
           CURRENTS_PROJECT_ID: bnsqNa
           CURRENTS_RECORD_KEY: ${{ secrets.CURRENTS_RECORD_KEY }}
           CURRENTS_CI_BUILD_ID: reporter-${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt }}

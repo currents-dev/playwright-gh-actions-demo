@@ -1,24 +1,25 @@
+import { currentsReporter } from "@currents/playwright";
 import { devices, PlaywrightTestConfig } from "@playwright/test";
 
 const config: PlaywrightTestConfig = {
   timeout: 10 * 1000,
-
   fullyParallel: true,
 
   expect: {
     timeout: 5000,
   },
 
-  forbidOnly: !!process.env.CI,
-  retries: process.env.CI ? 2 : 0,
-  workers: process.env.CI ? 1 : undefined,
+  forbidOnly: !!process.env.GITHUB_ACTIONS,
+  retries: 0,
+  workers: 1,
 
-  webServer: {
-    command: "node ./server",
-    port: 4346,
-    cwd: __dirname,
-    reuseExistingServer: true,
-  },
+  reporter: [
+    currentsReporter(),
+    [
+      // See https://argos-ci.com/docs/parallel-testing
+      "@argos-ci/playwright/reporter",
+    ],
+  ],
 
   use: {
     actionTimeout: 0,
@@ -29,8 +30,7 @@ const config: PlaywrightTestConfig = {
 
   projects: [
     {
-      name: "a",
-      retries: 2,
+      name: "chrome",
       use: {
         ...devices["Desktop Chrome"],
       },

@@ -12,7 +12,7 @@ test.beforeEach(async ({ page }) => {
  * by the completed items to ensure that the item is not visible anymore.
  * @see https://playwright.dev/docs/api/class-locator
  */
-test("basic interaction @tagA", async ({ page }, testInfo) => {
+test("basic interaction @basic", async ({ page }, testInfo) => {
   const inputBox = page.locator("input.new-todo");
   const todoList = page.locator(".todo-list");
 
@@ -33,7 +33,7 @@ test("basic interaction @tagA", async ({ page }, testInfo) => {
  * Playwright supports different selector engines which you can combine with '>>'.
  * @see https://playwright.dev/docs/selectors
  */
-test("element selectors @tagA", async ({ page }) => {
+test("element selectors @basic", async ({ page }) => {
   // When no selector engine is specified, Playwright will use the css selector engine.
   await page.type(".header input", "Learn Playwright");
   // So the selector above is the same as the following:
