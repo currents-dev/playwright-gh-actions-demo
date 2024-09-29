@@ -1,4 +1,4 @@
-name: demo.playwright.failed-only-shards
+name: failed-only-shards
 
 on:
   workflow_dispatch:
@@ -56,9 +56,10 @@ jobs:
         # env:
         #   DEBUG: "currents,currents:*"
         if: ${{ always() }}
+        # --pw-output-dir is the directory where the test results are stored
         run: |
           npx currents cache set \
             --preset last-run \
-            --pw-output-dir basic/test-results \ # This is the directory where the test results are stored
+            --pw-output-dir basic/test-results \
             --matrix-index ${{ matrix.shard }} \
             --matrix-total ${{ strategy.job-total }}
