@@ -17,9 +17,7 @@ To reproduce the setup:
 
 ## Examples
 
-See the example GH Actions configuration:
-
-### Parallel Playwright Tests using Playwright Shards and GitHub Actions Matrix
+Examples of various variants of integrating Currents with Playwright on GitHub Actions:
 
 - [test-basic-pwc.yml](.github/workflows/test-basic-pwc.yml) - parallel run using 3 shards and `pwc` command. Basic example of running playwright tests in parallel using 3 containers of GitHub Actions Matrix and `pwc` command.
 
