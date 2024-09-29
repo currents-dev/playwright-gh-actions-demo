@@ -15,12 +15,31 @@ To reproduce the setup:
 - Create an organization, get your **Record Key** and **Project Id** at https://app.currents.dev
 - Set [GitHub secret variable](https://docs.github.com/en/actions/reference/encrypted-secrets) `CURRENTS_RECORD_KEY`.
 
+## Examples
+
 See the example GH Actions configuration:
 
-- [test-basic-pwc.yml](.github/workflows/test-basic-pwc.yml)
-- [test-basic-reporter.yml](.github/workflows/test-basic-reporter.yml)
+### Parallel Playwright Tests using Playwright Shards and GitHub Actions Matrix
 
-Additional resources:
+- Parallel run using 3 shards and `pwc` command - [test-basic-pwc.yml](.github/workflows/test-basic-pwc.yml)
+
+<small>Basic example of running playwright tests in parallel using 3 containers of GitHub Actions Matrix and `pwc` command.</small>
+
+- Parallel run using 3 shards and `playwright.config.ts` configuration - [test-basic-reporter.yml](.github/workflows/test-basic-reporter.yml)
+
+<small>Basic example of running playwright tests in parallel using 3 containers of GitHub Actions Matrix configuring Currents Reporter in `playwright.config.ts`</small>
+
+### Parallel Playwright Tests using Currents Orchestration and GitHub Actions Matrix
+
+- Parallel run using 5 shards and [Currents Orchestration for Playwright](https://docs.currents.dev/guides/parallelization-guide/pw-parallelization/playwright-orchestration) - [test-or8n.yml](.github/workflows/test-or8n.yml)
+
+<small> Currents Orchestration speeds up CI runs by up to 40% (compared to native sharding) by optimally balancing tests between the available machines</small>
+
+### Misc
+
+- Parallel run using Argos CI and Currents orchestration - [argos-example.yml](.github/workflows/argos-example.yml)
+
+## Additional resources
 
 - Playwright Features on Currents: https://currents.dev/playwright
 - Integration Documentation: https://currents.dev/readme/integration-with-playwright/currents-playwright
