@@ -21,23 +21,13 @@ See the example GH Actions configuration:
 
 ### Parallel Playwright Tests using Playwright Shards and GitHub Actions Matrix
 
-- Parallel run using 3 shards and `pwc` command - [test-basic-pwc.yml](.github/workflows/test-basic-pwc.yml)
+- [test-basic-pwc.yml](.github/workflows/test-basic-pwc.yml) - parallel run using 3 shards and `pwc` command. Basic example of running playwright tests in parallel using 3 containers of GitHub Actions Matrix and `pwc` command.
 
-<small>Basic example of running playwright tests in parallel using 3 containers of GitHub Actions Matrix and `pwc` command.</small>
+- [test-basic-reporter.yml](.github/workflows/test-basic-reporter.yml) - parallel run using 3 shards and `playwright.config.ts`. Basic example of running playwright tests in parallel using 3 containers of GitHub Actions Matrix configuring Currents Reporter in `playwright.config.ts`.
 
-- Parallel run using 3 shards and `playwright.config.ts` configuration - [test-basic-reporter.yml](.github/workflows/test-basic-reporter.yml)
+- [test-or8n.yml](.github/workflows/test-or8n.yml) - parallel Playwright Tests using [Currents Orchestration for Playwright](https://docs.currents.dev/guides/parallelization-guide/pw-parallelization/playwright-orchestration) - and GitHub Actions Matrix. Currents Orchestration speeds up CI runs by up to 40% (compared to native sharding) by optimally balancing tests between the available machines.
 
-<small>Basic example of running playwright tests in parallel using 3 containers of GitHub Actions Matrix configuring Currents Reporter in `playwright.config.ts`</small>
-
-### Parallel Playwright Tests using Currents Orchestration and GitHub Actions Matrix
-
-- Parallel run using 5 shards and [Currents Orchestration for Playwright](https://docs.currents.dev/guides/parallelization-guide/pw-parallelization/playwright-orchestration) - [test-or8n.yml](.github/workflows/test-or8n.yml)
-
-<small> Currents Orchestration speeds up CI runs by up to 40% (compared to native sharding) by optimally balancing tests between the available machines</small>
-
-### Misc
-
-- Parallel run using Argos CI and Currents orchestration - [argos-example.yml](.github/workflows/argos-example.yml)
+- [argos-example.yml](.github/workflows/argos-example.yml) - parallel run using Argos CI and Currents orchestration.
 
 ## Additional resources
 
