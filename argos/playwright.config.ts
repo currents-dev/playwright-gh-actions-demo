@@ -16,8 +16,11 @@ const config: PlaywrightTestConfig = {
   reporter: [
     currentsReporter(),
     [
-      // See https://argos-ci.com/docs/parallel-testing
+      // See https://argos-ci.com/docs/quickstart/playwright
       "@argos-ci/playwright/reporter",
+      {
+        uploadToArgos: true,
+      },
     ],
   ],
 

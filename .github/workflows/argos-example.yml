@@ -35,7 +35,7 @@ jobs:
           npm ci
           npx playwright install chrome
 
-      - name: Run Argos
+      - name: Orchestrated PW + Argos
         working-directory: ./argos
         env:
           ARGOS_PARALLEL: 1
