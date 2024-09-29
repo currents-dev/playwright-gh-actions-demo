@@ -15,9 +15,7 @@
     "@typescript-eslint/eslint-plugin": "^5.22.0",
     "@typescript-eslint/parser": "^5.22.0",
     "eslint": "^8.14.0",
-    "playwright-lighthouse": "^2.2.1"
-  },
-  "dependencies": {
+    "playwright-lighthouse": "^2.2.1",
     "@argos-ci/cli": "^2.4.3",
     "@argos-ci/playwright": "^3.6.1",
     "@axe-core/playwright": "^4.4.4",
