@@ -35,8 +35,8 @@ jobs:
           npx playwright install chrome
           npm install -g @currents/cmd@beta
       - name: Load last run from cache
-        env:
-          DEBUG: "currents,currents:*"
+        # env:
+        #   DEBUG: "currents,currents:*"
         run: |
           npx currents cache get \
             --preset last-run \
