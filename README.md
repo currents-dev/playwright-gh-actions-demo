@@ -29,7 +29,8 @@ Examples of various variants of integrating Currents with Playwright on GitHub A
 
 ### Reruns only the failed tests
 
-- [rerun-shards-pwc.yml](.github/workflows/rerun-shards-pwc.yml) - rerun only the tests that failed in the previous run, uses `pwc` helper command.
+- [rerun-shards-pwc.yml](.github/workflows/rerun-shards-pwc.yml) - rerun only the tests that failed in the previous run, using `pwc` helper command that is included in `@currents/playwright` package.
+- [rerun-shards-reporter.yml](.github/workflows/rerun-shards-reporter.yml) - rerun only the tests that failed in the previous run, using reporter explicitly configured in `playwright.config.ts`
 - [reruns-or8n.yml](.github/workflows/reruns-or8n.yml) - rerun only the tests that failed in the previous orchestrated run
 
 ## Additional resources
