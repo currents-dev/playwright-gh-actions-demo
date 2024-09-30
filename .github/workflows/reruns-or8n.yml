@@ -16,9 +16,7 @@ jobs:
       CURRENTS_PROJECT_ID: bnsqNa
       CURRENTS_RECORD_KEY: ${{ secrets.CURRENTS_RECORD_KEY }}
       CURRENTS_CI_BUILD_ID: ${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt }}
-      #   CURRENTS_API_URL: ${{ secrets.CURRENTS_API_URL }}
       CURRENTS_API_KEY: ${{ secrets.CURRENTS_API_KEY }}
-      CURRENTS_REST_API_URL: ${{ secrets.CURRENTS_REST_API_URL }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -38,11 +36,13 @@ jobs:
           npx playwright install chrome
           npm install -g @currents/cmd@beta
       - name: Resolve Playwright options
+        # --output basic/test-results/.last-run.json should point to the directory where the test results are stored
         run: |
           PREVIOUS_CI_BUILD_ID="${GITHUB_REPOSITORY}-${GITHUB_RUN_ID}-$((GITHUB_RUN_ATTEMPT - 1))"
           EXTRA_PW_FLAGS=""
           if [ ${{ github.run_attempt }} -gt 1 ]; then
-            if npx currents api get-run --pw-last-run --ci-build-id $PREVIOUS_CI_BUILD_ID --output basic/test-results/.last-run.json; then
+            if npx currents api get-run --pw-last-run --ci-build-id 
+            $PREVIOUS_CI_BUILD_ID --output basic/test-results/.last-run.json; then
               EXTRA_PW_FLAGS="--last-failed"
             fi
           fi
