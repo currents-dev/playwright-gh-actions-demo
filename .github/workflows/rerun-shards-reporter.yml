@@ -1,10 +1,10 @@
-name: failed-only-shards
+name: failed-only-reporter
 
 on:
-  workflow_dispatch:
+  push:
 
 jobs:
-  test-shards:
+  test-reporter:
     strategy:
       fail-fast: false
       matrix:
@@ -15,7 +15,8 @@ jobs:
     env:
       CURRENTS_PROJECT_ID: bnsqNa
       CURRENTS_RECORD_KEY: ${{ secrets.CURRENTS_RECORD_KEY }}
-      CURRENTS_CI_BUILD_ID: ${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt }}
+      CURRENTS_CI_BUILD_ID: reporter-${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt }}
+      CURRENTS_API_URL: ${{ secrets.CURRENTS_API_URL }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -34,6 +35,7 @@ jobs:
           npm ci
           npx playwright install chrome
           npm install -g @currents/cmd@beta
+
       - name: Load last run from cache
         # env:
         #   DEBUG: "currents,currents:*"
@@ -48,15 +50,13 @@ jobs:
       - name: Playwright Tests
         working-directory: ./basic
         run: |
-          COMMAND="npx pwc $EXTRA_PW_FLAGS"
+          COMMAND="npx playwright test --config playwright.config.reporter.ts $EXTRA_PW_FLAGS"
           echo "Running command: $COMMAND"
           $COMMAND
-
       - name: Cache the last run results
         # env:
         #   DEBUG: "currents,currents:*"
         if: ${{ always() }}
-        # --pw-output-dir is the directory where the test results are stored
         run: |
           npx currents cache set \
             --preset last-run \

@@ -10,7 +10,7 @@ test.beforeEach(async ({ page }) => {
  */
 test("should be able to use assertions", async ({ page }) => {
   await test.step("toHaveTitle/toHaveURL", async () => {
-    await expect(page).toHaveTitle("Vanilla ES6 • TodoMVC");
+    await expect(page).toHaveTitle("TodoMVC: Backbone");
     await expect(page).toHaveURL("https://todomvc.com/examples/backbone/dist/");
   });
 

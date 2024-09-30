@@ -1,10 +1,10 @@
-name: failed-only-shards
+name: failed-only-or8n
 
 on:
-  workflow_dispatch:
+  push:
 
 jobs:
-  test-shards:
+  test-or8n:
     strategy:
       fail-fast: false
       matrix:
@@ -16,6 +16,7 @@ jobs:
       CURRENTS_PROJECT_ID: bnsqNa
       CURRENTS_RECORD_KEY: ${{ secrets.CURRENTS_RECORD_KEY }}
       CURRENTS_CI_BUILD_ID: ${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt }}
+      CURRENTS_API_KEY: ${{ secrets.CURRENTS_API_KEY }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -34,32 +35,22 @@ jobs:
           npm ci
           npx playwright install chrome
           npm install -g @currents/cmd@beta
-      - name: Load last run from cache
-        # env:
-        #   DEBUG: "currents,currents:*"
+      - name: Resolve Playwright options
+        # --output basic/test-results/.last-run.json should point to the directory where the test results are stored
         run: |
-          npx currents cache get \
-            --preset last-run \
-            --preset-output .preset_output \
-            --matrix-index ${{ matrix.shard }} \
-            --matrix-total ${{ strategy.job-total }}
-          echo "EXTRA_PW_FLAGS=$(cat .preset_output)" >> $GITHUB_ENV
+          PREVIOUS_CI_BUILD_ID="${GITHUB_REPOSITORY}-${GITHUB_RUN_ID}-$((GITHUB_RUN_ATTEMPT - 1))"
+          EXTRA_PW_FLAGS=""
+          if [ ${{ github.run_attempt }} -gt 1 ]; then
+            if npx currents api get-run --pw-last-run --ci-build-id 
+            $PREVIOUS_CI_BUILD_ID --output basic/test-results/.last-run.json; then
+              EXTRA_PW_FLAGS="--last-failed"
+            fi
+          fi
+          echo "EXTRA_PW_FLAGS=$EXTRA_PW_FLAGS" >> $GITHUB_ENV
 
       - name: Playwright Tests
         working-directory: ./basic
         run: |
-          COMMAND="npx pwc $EXTRA_PW_FLAGS"
+          COMMAND="npx pwc-p ${{ env.EXTRA_PW_FLAGS }}"
           echo "Running command: $COMMAND"
-          $COMMAND
-
-      - name: Cache the last run results
-        # env:
-        #   DEBUG: "currents,currents:*"
-        if: ${{ always() }}
-        # --pw-output-dir is the directory where the test results are stored
-        run: |
-          npx currents cache set \
-            --preset last-run \
-            --pw-output-dir basic/test-results \
-            --matrix-index ${{ matrix.shard }} \
-            --matrix-total ${{ strategy.job-total }}
+          eval $COMMAND
