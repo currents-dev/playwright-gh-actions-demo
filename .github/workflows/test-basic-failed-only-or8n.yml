@@ -15,7 +15,7 @@ jobs:
     env:
       CURRENTS_PROJECT_ID: bnsqNa
       CURRENTS_RECORD_KEY: ${{ secrets.CURRENTS_RECORD_KEY }}
-      CURRENTS_CI_BUILD_ID: or8n-${GITHUB_REPOSITORY}-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}
+      CURRENTS_CI_BUILD_ID: or8n-${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt }}
       CURRENTS_API_URL: ${{ secrets.CURRENTS_API_URL }}
       CURRENTS_API_KEY: ${{ secrets.CURRENTS_API_KEY }}
       CURRENTS_REST_API_URL: ${{ secrets.CURRENTS_REST_API_URL }}
