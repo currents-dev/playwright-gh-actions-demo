@@ -16,7 +16,6 @@ jobs:
       CURRENTS_PROJECT_ID: bnsqNa
       CURRENTS_RECORD_KEY: ${{ secrets.CURRENTS_RECORD_KEY }}
       CURRENTS_CI_BUILD_ID: reporter-${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt }}
-      CURRENTS_API_URL: ${{ secrets.CURRENTS_API_URL }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -34,32 +33,19 @@ jobs:
         run: |
           npm ci
           npx playwright install chrome
-          npm install -g @currents/cmd@beta
 
-      - name: Load last run from cache
-        # env:
-        #   DEBUG: "currents,currents:*"
-        run: |
-          npx currents cache get \
-            --preset last-run \
-            --preset-output .preset_output \
-            --matrix-index ${{ matrix.shard }} \
-            --matrix-total ${{ strategy.job-total }}
-          echo "EXTRA_PW_FLAGS=$(cat .preset_output)" >> $GITHUB_ENV
+      - name: Playwright Last Failed action
+        id: last-failed-action
+        uses: currents-dev/playwright-last-failed@v1
+        with:
+          # debug: true
+          pw-output-dir: basic/test-results
+          matrix-index: ${{ matrix.shard }}
+          matrix-total: ${{ strategy.job-total }}
 
       - name: Playwright Tests
         working-directory: ./basic
         run: |
-          COMMAND="npx playwright test --config playwright.config.reporter.ts $EXTRA_PW_FLAGS"
+          COMMAND="npx playwright test --config playwright.config.reporter.ts ${{ steps.last-failed-action.outputs.extra-pw-flags }}"
           echo "Running command: $COMMAND"
           $COMMAND
-      - name: Cache the last run results
-        # env:
-        #   DEBUG: "currents,currents:*"
-        if: ${{ always() }}
-        run: |
-          npx currents cache set \
-            --preset last-run \
-            --pw-output-dir basic/test-results \
-            --matrix-index ${{ matrix.shard }} \
-            --matrix-total ${{ strategy.job-total }}
