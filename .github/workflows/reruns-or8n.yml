@@ -34,23 +34,19 @@ jobs:
         run: |
           npm ci
           npx playwright install chrome
-          npm install -g @currents/cmd@beta
-      - name: Resolve Playwright options
-        # --output basic/test-results/.last-run.json should point to the directory where the test results are stored
-        run: |
-          PREVIOUS_CI_BUILD_ID="${GITHUB_REPOSITORY}-${GITHUB_RUN_ID}-$((GITHUB_RUN_ATTEMPT - 1))"
-          EXTRA_PW_FLAGS=""
-          if [ ${{ github.run_attempt }} -gt 1 ]; then
-            if npx currents api get-run --pw-last-run --ci-build-id 
-            $PREVIOUS_CI_BUILD_ID --output basic/test-results/.last-run.json; then
-              EXTRA_PW_FLAGS="--last-failed"
-            fi
-          fi
-          echo "EXTRA_PW_FLAGS=$EXTRA_PW_FLAGS" >> $GITHUB_ENV
+
+      - name: Playwright Last Failed action
+        id: last-failed-action
+        uses: currents-dev/playwright-last-failed@v1
+        with:
+          or8n: true
+          # debug: true
+          # previous-ci-build-id: default is ${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt - 1 }}
+          pw-output-dir: basic/test-results
 
       - name: Playwright Tests
         working-directory: ./basic
         run: |
-          COMMAND="npx pwc-p ${{ env.EXTRA_PW_FLAGS }}"
+          COMMAND="npx pwc-p ${{ steps.last-failed-action.outputs.extra-pw-flags }}"
           echo "Running command: $COMMAND"
-          eval $COMMAND
+          $COMMAND
