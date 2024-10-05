@@ -2,9 +2,7 @@ name: demo.playwright.pwc
 on:
   workflow_dispatch:
   pull_request:
-    branches: [main]
-  push:
-    branches: [main]
+
 jobs:
   basicTests:
     strategy:
@@ -16,7 +14,7 @@ jobs:
     name: "Playwright Tests - pwc"
     timeout-minutes: 60
     runs-on: ubuntu-22.04
-    container: mcr.microsoft.com/playwright:1.46.1
+    container: mcr.microsoft.com/playwright:latest
 
     steps:
       - uses: actions/checkout@v4
@@ -37,20 +35,11 @@ jobs:
           npm ci
           npx playwright install chrome
 
-      - name: Run Project A
+      - name: Playwright Tests
         continue-on-error: false
         working-directory: ./basic
         env:
           CURRENTS_PROJECT_ID: bnsqNa
           CURRENTS_RECORD_KEY: ${{ secrets.CURRENTS_RECORD_KEY }}
         run: |
-          npx pwc --project a --shard=${{ matrix.shard }}/${{ strategy.job-total }}
-
-      - name: Run Project B
-        continue-on-error: false
-        working-directory: ./basic
-        env:
-          CURRENTS_PROJECT_ID: bnsqNa
-          CURRENTS_RECORD_KEY: ${{ secrets.CURRENTS_RECORD_KEY }}
-        run: |
-          npx pwc --project  --shard=${{ matrix.shard }}/${{ strategy.job-total }}
+          npx pwc --shard=${{ matrix.shard }}/${{ strategy.job-total }}

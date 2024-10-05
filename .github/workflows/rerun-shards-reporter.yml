@@ -1,7 +1,7 @@
 name: failed-only-reporter
 
 on:
-  push:
+  workflow_dispatch:
 
 jobs:
   test-reporter:

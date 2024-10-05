@@ -13,13 +13,6 @@ const config: PlaywrightTestConfig = {
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 1 : undefined,
 
-  webServer: {
-    command: "node ./server",
-    port: 4346,
-    cwd: __dirname,
-    reuseExistingServer: true,
-  },
-
   use: {
     actionTimeout: 0,
     trace: "on",
@@ -29,7 +22,14 @@ const config: PlaywrightTestConfig = {
 
   projects: [
     {
-      name: "a",
+      name: "Project A",
+      retries: 2,
+      use: {
+        ...devices["Desktop Chrome"],
+      },
+    },
+    {
+      name: "Project B",
       retries: 2,
       use: {
         ...devices["Desktop Chrome"],
