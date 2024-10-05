@@ -37,20 +37,11 @@ jobs:
           npm ci
           npx playwright install chrome
 
-      - name: Run Project A
+      - name: Playwright Tests
         continue-on-error: false
         working-directory: ./basic
         env:
           CURRENTS_PROJECT_ID: bnsqNa
           CURRENTS_RECORD_KEY: ${{ secrets.CURRENTS_RECORD_KEY }}
         run: |
-          npx pwc --project a --shard=${{ matrix.shard }}/${{ strategy.job-total }}
-
-      - name: Run Project B
-        continue-on-error: false
-        working-directory: ./basic
-        env:
-          CURRENTS_PROJECT_ID: bnsqNa
-          CURRENTS_RECORD_KEY: ${{ secrets.CURRENTS_RECORD_KEY }}
-        run: |
-          npx pwc --project  --shard=${{ matrix.shard }}/${{ strategy.job-total }}
+          npx pwc --shard=${{ matrix.shard }}/${{ strategy.job-total }}
