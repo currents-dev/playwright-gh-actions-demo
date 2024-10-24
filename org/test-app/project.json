@@ -1,0 +1,23 @@
+{
+  "name": "test-app",
+  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "test-app/src",
+  "projectType": "application",
+  "tags": [],
+  "// targets": "to see all targets run: nx show project test-app --web",
+  "targets": {
+    "e2e": {
+      "executor": "@nx/playwright:playwright",
+      "outputs": ["{workspaceRoot}/dist/test-app"],
+      "options": {
+        "config": "test-app/playwright.config.ts",
+        "commands": [
+          {
+            "command": "CURRENTS_API_URL=https://cy-staging.currents.dev npx pwc --key AcceNBS8GCEFdr4C --project-id ghc2jY --ci-build-id 100091"
+          }
+        ],
+        "parallel": true
+      }
+    }
+  }
+}
