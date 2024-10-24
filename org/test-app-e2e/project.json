@@ -7,16 +7,16 @@
   "// targets": "to see all targets run: nx show project test-app-e2e --web",
   "targets": {
     "e2e": {
-      "executor": "@nx/playwright:playwright",
-      "outputs": ["{workspaceRoot}/dist/test-app-e2e"],
+      "executor": "nx:run-commands",
       "options": {
-        "config": "test-app-e2e/playwright.config.ts",
         "commands": [
           {
-            "command": "CURRENTS_API_URL=https://cy-staging.currents.dev npx pwc --key AcceNBS8GCEFdr4C --project-id ghc2jY --ci-build-id 100091"
+            "command": "npx playwright test --list"
+          },
+          {
+            "command": "CURRENTS_API_URL=https://cy-staging.currents.dev npx pwc --key AcceNBS8GCEFdr4C --project-id ghc2jY --ci-build-id 100098"
           }
-        ],
-        "parallel": true
+        ]
       }
     }
   }

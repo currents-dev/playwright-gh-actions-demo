@@ -21,6 +21,7 @@ const baseURL = process.env['BASE_URL'] || 'http://localhost:4300';
 const currentsConfig: CurrentsConfig = {
   recordKey: 'AcceNBS8GCEFdr4C',
   projectId: 'ghc2jY',
+  ciBuildId: '100101'
 };
 
 export default defineConfig({

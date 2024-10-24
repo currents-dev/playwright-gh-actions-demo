@@ -7,8 +7,7 @@
           {
             "command": "CURRENTS_API_URL=https://cy-staging.currents.dev npx pwc --key AcceNBS8GCEFdr4C --project-id ghc2jY --ci-build-id 100091"
           }
-        ],
-        "parallel": true
+        ]
       }
     }
   }
