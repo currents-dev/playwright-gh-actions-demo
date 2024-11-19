@@ -30,7 +30,13 @@ jobs:
 
       # Dump the GitHub context
       - name: Dump GitHub Context
-        run: echo '${{ toJson(github) }}'
+        run:
+          echo '${{ toJson(github) }}'
+
+          # Dump Environment variables
+      - name: Dump Env Vars
+        run: |
+          printenv  | grep -v "SECRET" | sort
 
       # Dump Environment variables
       - name: Dump Env Context
