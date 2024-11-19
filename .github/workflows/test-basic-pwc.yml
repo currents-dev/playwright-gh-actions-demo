@@ -11,12 +11,12 @@ jobs:
       fail-fast: false
       matrix:
         # run 3 copies of the job in parallel
-        shard: [1, 2, 3]
+        shard: [1]
 
     name: "Playwright Tests - pwc"
     timeout-minutes: 60
     runs-on: ubuntu-22.04
-    container: mcr.microsoft.com/playwright:1.46.1
+    container: mcr.microsoft.com/playwright:latest
 
     steps:
       # - uses: actions/checkout@v4
