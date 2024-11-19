@@ -19,29 +19,75 @@ jobs:
     container: mcr.microsoft.com/playwright:1.46.1
 
     steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
+      # - uses: actions/checkout@v4
+      #   with:
+      #     ref: ${{ github.event.pull_request.head.sha }}
 
       # https://github.com/actions/runner-images/issues/6775
       - run: |
           echo "$GITHUB_WORKSPACE"
           git config --global --add safe.directory "$GITHUB_WORKSPACE"
 
-      - uses: actions/setup-node@v4
-        with:
-          node-version: "20.x"
+      # Dump the GitHub context
+      - name: Dump GitHub Context
+        run: echo '${{ toJson(github) }}'
 
-      - name: Install dependencies
+      # Dump Environment variables
+      - name: Dump Env Context
         run: |
-          npm ci
-          npx playwright install chrome
+          echo '${{ toJson(env) }}'
 
-      - name: Playwright Tests
-        continue-on-error: false
-        working-directory: ./basic
-        env:
-          CURRENTS_PROJECT_ID: bnsqNa
-          CURRENTS_RECORD_KEY: ${{ secrets.CURRENTS_RECORD_KEY }}
+      - name: Dump Strategy Context
         run: |
-          npx pwc --shard=${{ matrix.shard }}/${{ strategy.job-total }}
+          echo '${{ toJson(strategy) }}'
+
+      - name: Dump vars Context
+        run: |
+          echo '${{ toJson(vars) }}'
+
+      - name: Dump needs Context
+        run: |
+          echo '${{ toJson(needs) }}'
+
+      - name: Dump needs Context
+        run: |
+          echo '${{ toJson(inputs) }}'
+
+      # Dump Job Context
+      - name: Dump Job Context
+        run: echo '${{ toJson(job) }}'
+
+      # Dump Runner Context
+      - name: Dump Runner Context
+        run: echo '${{ toJson(runner) }}'
+
+      # Dump Steps Context
+      - name: Dump Steps Context
+        run: echo '${{ toJson(steps) }}'
+
+      # Dump Secrets (only keys, not values, for security reasons)
+      - name: List Secrets Keys
+        run: echo '${{ toJson(secrets) }}'
+
+      # Dump Matrix Context (if matrix is used)
+      - name: Dump Matrix Context
+        if: ${{ matrix }}
+        run: echo '${{ toJson(matrix) }}'
+
+      # - uses: actions/setup-node@v4
+      #   with:
+      #     node-version: "20.x"
+
+      # - name: Install dependencies
+      #   run: |
+      #     npm ci
+      #     npx playwright install chrome
+
+      # - name: Playwright Tests
+      #   continue-on-error: false
+      #   working-directory: ./basic
+      #   env:
+      #     CURRENTS_PROJECT_ID: bnsqNa
+      #     CURRENTS_RECORD_KEY: ${{ secrets.CURRENTS_RECORD_KEY }}
+      #   run: |
+      #     npx pwc --shard=${{ matrix.shard }}/${{ strategy.job-total }}
