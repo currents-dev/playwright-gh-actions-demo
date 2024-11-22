@@ -22,15 +22,15 @@ const config: PlaywrightTestConfig = {
 
   projects: [
     {
-      name: "Project A",
-      retries: 2,
+      name: "A",
+      // retries: 2,
       use: {
         ...devices["Desktop Chrome"],
       },
     },
     {
-      name: "Project B",
-      retries: 2,
+      name: "B",
+      // retries: 2,
       use: {
         ...devices["Desktop Chrome"],
       },
