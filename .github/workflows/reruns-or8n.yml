@@ -41,7 +41,7 @@ jobs:
         with:
           or8n: true
           # debug: true
-          # previous-ci-build-id: default is ${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt - 1 }}
+          # previous-ci-build-id: default is ${{ github.repository }}-${{ github.run_id }}-<%= ${{ github.run_attempt }} - 1 %>
           pw-output-dir: basic/test-results
 
       - name: Playwright Tests
