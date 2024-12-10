@@ -15,7 +15,6 @@ const config = defineConfig<CurrentsFixtures, CurrentsWorkerFixtures>({
   workers: process.env.CI ? 1 : undefined,
 
   use: {
-    baseURL: process.env.BASEURL || "http://localhost:4346",
     actionTimeout: 0,
     trace: "on",
     video: "on",
@@ -41,7 +40,7 @@ const config = defineConfig<CurrentsFixtures, CurrentsWorkerFixtures>({
 
   webServer: {
     command: 'node ./server/index.js',
-    url: 'http://127.0.0.1:4346',
+    port: 4346,
     reuseExistingServer: !process.env.CI,
     stdout: 'ignore',
     stderr: 'pipe',

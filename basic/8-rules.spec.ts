@@ -11,7 +11,7 @@ import { test } from "./base.ts";
  * This is a failing test that will be quarantined by the file based rule
  */
 test("rules quarantine test", async ({ page }) => {
-  await page.goto("https://todomvc.com/examples/backbone/dist/");
+  await page.goto("https://demo.playwright.dev/todomvc");
 
   // Use locators to represent a selector and re-use them
   const inputBox = page.locator("input.new-todo");
@@ -26,7 +26,7 @@ test("rules quarantine test", async ({ page }) => {
  * This tests will be completely skipped by a rule that matches fileName + test name
  */
 test("rules skip test", async ({ page }) => {
-  await page.goto("https://todomvc.com/examples/backbone/dist/");
+  await page.goto("https://demo.playwright.dev/todomvc");
 
   // Use locators to represent a selector and re-use them
   const inputBox = page.locator("input.new-todo");

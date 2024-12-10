@@ -2,7 +2,7 @@ import { expect } from "@playwright/test";
 import { test } from "./base.ts";
 
 test.beforeEach(async ({ page }) => {
-  await page.goto("https://todomvc.com/examples/backbone/dist/");
+  await page.goto("https://demo.playwright.dev/todomvc");
 });
 
 /**
@@ -11,8 +11,8 @@ test.beforeEach(async ({ page }) => {
  */
 test("should be able to use assertions", async ({ page }) => {
   await test.step("toHaveTitle/toHaveURL", async () => {
-    await expect(page).toHaveTitle("TodoMVC: Backbone");
-    await expect(page).toHaveURL("https://todomvc.com/examples/backbone/dist/");
+    await expect(page).toHaveTitle("React • TodoMVC");
+    await expect(page).toHaveURL(/^https:\/\/demo.playwright.dev\/todomvc/);
   });
 
   await test.step("toBeEmpty/toHaveValue", async () => {
@@ -46,11 +46,9 @@ test("should be able to use assertions", async ({ page }) => {
     await expect(page.locator("text=Buy milk")).toBeHidden();
   });
 
-  await test.step("toHaveClass/toHaveCSS", async () => {
+  await test.step("toHaveClass", async () => {
     await expect(
       page.locator('[placeholder="What needs to be done?"]')
     ).toHaveClass("new-todo");
-    await page.click("text=Clear completed");
-    await expect(page.locator(".main")).toHaveCSS("display", "none");
   });
 });

@@ -25,6 +25,6 @@ export class TodoPage {
   }
 
   async goto() {
-    await this.page.goto("https://todomvc.com/examples/backbone/dist/");
+    await this.page.goto("https://demo.playwright.dev/todomvc");
   }
 }
