@@ -1,4 +1,5 @@
-import { test, expect } from "@playwright/test";
+import { expect } from "@playwright/test";
+import { test } from "./base.ts";
 import AxeBuilder from "@axe-core/playwright"; // 1
 
 test.describe("homepage", () => {

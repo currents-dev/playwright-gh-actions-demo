@@ -1,4 +1,5 @@
-import {test, expect} from '@playwright/test';
+import { expect } from "@playwright/test";
+import { test } from "./base.ts";
 
 const fileToUpload = __filename; // '__filename' is the current test file.
 

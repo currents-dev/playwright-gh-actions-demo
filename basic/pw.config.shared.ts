@@ -1,6 +1,7 @@
-import { devices, PlaywrightTestConfig } from "@playwright/test";
+import { CurrentsFixtures, CurrentsWorkerFixtures } from "@currents/playwright";
+import { defineConfig, devices } from "@playwright/test";
 
-const config: PlaywrightTestConfig = {
+const config = defineConfig<CurrentsFixtures, CurrentsWorkerFixtures>({
   timeout: 10 * 1000,
 
   fullyParallel: true,
@@ -37,8 +38,16 @@ const config: PlaywrightTestConfig = {
     },
   ],
 
+  webServer: {
+    command: 'node ./server/index.js',
+    port: 4346,
+    reuseExistingServer: !process.env.CI,
+    stdout: 'ignore',
+    stderr: 'pipe',
+  },
+
   /* Folder for test artifacts such as screenshots, videos, traces, etc. */
   outputDir: "test-results/",
-};
+});
 
 export default config;

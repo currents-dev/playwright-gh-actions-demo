@@ -30,7 +30,7 @@ jobs:
     name: "Playwright Tests - check failed"
     timeout-minutes: 60
     runs-on: ubuntu-22.04
-    container: mcr.microsoft.com/playwright:latest
+    container: mcr.microsoft.com/playwright:v1.49.0-jammy
     steps:
       - uses: actions/checkout@v4
         with:
@@ -96,7 +96,7 @@ jobs:
     name: "Playwright Tests - run basic tests"
     timeout-minutes: 60
     runs-on: ubuntu-22.04
-    container: mcr.microsoft.com/playwright:latest
+    container: mcr.microsoft.com/playwright:v1.49.0-jammy
     steps:
       - uses: actions/checkout@v4
         with:
@@ -134,7 +134,7 @@ jobs:
     if: 'failure()'
     needs: [previousFailedFirst, fullRun]
     runs-on: ubuntu-22.04
-    container: mcr.microsoft.com/playwright:latest
+    container: mcr.microsoft.com/playwright:v1.49.0-jammy
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
