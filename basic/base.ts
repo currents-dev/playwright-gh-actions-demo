@@ -7,5 +7,5 @@ import { test as base } from "@playwright/test";
 
 export const test = base.extend<CurrentsFixtures, CurrentsWorkerFixtures>({
   ...fixtures.baseFixtures,
-  ...fixtures.rulesFixtures,
+  ...fixtures.actionFixtures,
 });

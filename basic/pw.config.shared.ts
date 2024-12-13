@@ -19,6 +19,8 @@ const config = defineConfig<CurrentsFixtures, CurrentsWorkerFixtures>({
     trace: "on",
     video: "on",
     screenshot: "on",
+    // We can disable Currents fixtures if no project ID is provided
+    currentsFixturesEnabled: !!process.env.CURRENTS_PROJECT_ID,
   },
 
   projects: [
