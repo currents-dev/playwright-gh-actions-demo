@@ -41,11 +41,11 @@ const config = defineConfig<CurrentsFixtures, CurrentsWorkerFixtures>({
   ],
 
   webServer: {
-    command: 'node ./server/index.js',
+    command: "node ./server/index.js",
     port: 4346,
     reuseExistingServer: !process.env.CI,
-    stdout: 'ignore',
-    stderr: 'pipe',
+    stdout: "ignore",
+    stderr: "pipe",
   },
 
   /* Folder for test artifacts such as screenshots, videos, traces, etc. */
