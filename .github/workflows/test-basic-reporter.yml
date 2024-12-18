@@ -13,7 +13,7 @@ jobs:
         # run 3 copies of the current job in parallel
         shard: [1, 2]
     name: "Playwright Tests - Reporter"
-    timeout-minutes: 60
+    timeout-minutes: 5
     runs-on: ubuntu-22.04
     container: mcr.microsoft.com/playwright:v1.49.0-jammy
 
@@ -45,3 +45,4 @@ jobs:
           CURRENTS_CI_BUILD_ID: reporter-${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt }}
         run: |
           npx playwright test --shard=${{ matrix.shard }}/${{ strategy.job-total }} --config ./playwright.config.reporter.ts
+          cat .currents-report.json
