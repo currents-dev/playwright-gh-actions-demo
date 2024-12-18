@@ -47,6 +47,7 @@ jobs:
           npx playwright test --shard=${{ matrix.shard }}/${{ strategy.job-total }} --config ./playwright.config.reporter.ts --grep @basic
 
       - name: Show Summary
+        if: always()
         working-directory: ./basic
         run: |
           cat currents-report.json
