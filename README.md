@@ -23,6 +23,8 @@ Examples of various variants of integrating Currents with Playwright on GitHub A
 
 - [test-basic-reporter.yml](.github/workflows/test-basic-reporter.yml) - parallel run using 3 shards and `playwright.config.ts`. Basic example of running playwright tests in parallel using 3 containers of GitHub Actions Matrix configuring Currents Reporter in `playwright.config.ts`.
 
+- [test-basic-reporter-with-summary.yml](.github/workflows/test-basic-reporter-with-summary.yml) - parallel run using 2 shards and `playwright.config.ts` prints summary at the end of a run for each shard.
+
 - [test-or8n.yml](.github/workflows/test-or8n.yml) - parallel Playwright Tests using [Currents Orchestration for Playwright](https://docs.currents.dev/guides/parallelization-guide/pw-parallelization/playwright-orchestration) - and GitHub Actions Matrix. Currents Orchestration speeds up CI runs by up to 40% (compared to native sharding) by optimally balancing tests between the available machines.
 
 - [argos-example.yml](.github/workflows/argos-example.yml) - parallel run using Argos CI and Currents orchestration.
