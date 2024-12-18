@@ -3,7 +3,6 @@ import { defineConfig, devices } from "@playwright/test";
 
 const config = defineConfig<CurrentsFixtures, CurrentsWorkerFixtures>({
   timeout: 10 * 1000,
-
   fullyParallel: true,
 
   expect: {
@@ -26,14 +25,7 @@ const config = defineConfig<CurrentsFixtures, CurrentsWorkerFixtures>({
   projects: [
     {
       name: "Project A",
-      retries: 2,
-      use: {
-        ...devices["Desktop Chrome"],
-      },
-    },
-    {
-      name: "Project B",
-      retries: 2,
+      retries: 0,
       use: {
         ...devices["Desktop Chrome"],
       },
