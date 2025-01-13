@@ -41,7 +41,9 @@ jobs:
         continue-on-error: false
         working-directory: ./basic
         env:
-          CURRENTS_PROJECT_ID: bnsqNa
+          CURRENTS_PROJECT_ID: ${{ secrets.CURRENTS_PROJECT_ID }}
           CURRENTS_RECORD_KEY: ${{ secrets.CURRENTS_RECORD_KEY }}
+          CURRENTS_API_URL: ${{ secrets.CURRENTS_API_URL }}
+          DEBUG: "currents,currents:*"
         run: |
           npx pwc --shard=${{ matrix.shard }}/${{ strategy.job-total }}

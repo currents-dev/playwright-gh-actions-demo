@@ -18,8 +18,7 @@
 name: demo.playwright.pwc-failed
 on:
   workflow_dispatch:
-  pull_request:
-    branches: [main]
+
 jobs:
   previousFailedFirst:
     strategy:
