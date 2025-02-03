@@ -1,5 +1,6 @@
 import { expect } from "@playwright/test";
 import { test } from "./base.ts";
+console.log("asd");
 
 test("basic test @basic", async ({ page }) => {
   await page.goto("https://demo.playwright.dev/todomvc");
