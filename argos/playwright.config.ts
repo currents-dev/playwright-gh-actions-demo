@@ -24,8 +24,8 @@ const config: PlaywrightTestConfig = {
   use: {
     actionTimeout: 0,
     trace: "on",
-    video: "on",
-    screenshot: "on",
+    video: "retain-on-failure",
+    screenshot: "only-on-failure",
   },
 
   projects: [
