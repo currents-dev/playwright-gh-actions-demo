@@ -1,6 +1,7 @@
 import { expect } from "@playwright/test";
 import { test } from "./base.ts";
 
+console.log("asd");
 test.beforeEach(async ({ page }) => {
   await page.goto("https://todomvc.com/examples/backbone/dist/");
 });
