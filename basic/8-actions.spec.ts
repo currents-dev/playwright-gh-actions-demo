@@ -1,5 +1,8 @@
 import { expect } from "@playwright/test";
 import { test } from "./base.ts";
+import fs from 'fs';
+import path from 'path';
+
 
 /**
  * All tests in this file are matched with a Currents Quarantine Action based on filename.
@@ -35,7 +38,8 @@ test("action quarantine test", async ({ page }) => {
  * | File  | is        | 8-actions.spec.ts | And  |            |
  * | Title | is        | action skip test  | ->   | Skip       |
  */
-test("action skip test", async ({ page }) => {
+
+test("action skip test", async ({ page }, testInfo) => {
   await page.goto("https://demo.playwright.dev/todomvc");
 
   // Use locators to represent a selector and re-use them
@@ -45,4 +49,19 @@ test("action skip test", async ({ page }) => {
   await inputBox.fill("Learn JavaScript");
   await inputBox.press("Enter");
   await expect(todoList).toHaveText("Learn JavaScript");
+  
+  // const secrets = { secrets: ["some-password", "some-token"] };
+  // const filePath = path.join(testInfo.outputDir, 'secrets.json'); // store in test output dir
+  // // Make sure the output directory exists
+  // fs.mkdirSync(testInfo.outputDir, { recursive: true });
+  
+  // fs.writeFileSync(filePath, JSON.stringify(secrets, null, 2));
+
+  // // Attach to the test
+  // await testInfo.attach('secrets.json', {
+  //   path: filePath,
+  //   contentType: 'application/json'
+  // });
+
+  // console.log(`Attached secrets.json to the test report: ${filePath}`);
 });

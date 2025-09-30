@@ -1,0 +1,131 @@
+{
+  "cookies": [
+    {
+      "name": "AMP_MKTG_6d6952d6ff",
+      "value": "JTdCJTdE",
+      "domain": ".currents.dev",
+      "path": "/",
+      "expires": 1787750330,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "intercom-id-wqhxfxbv",
+      "value": "d5e3b8f3-5c86-408d-8372-ccb2fe2e12ed",
+      "domain": ".currents.dev",
+      "path": "/",
+      "expires": 1779544332,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "intercom-device-id-wqhxfxbv",
+      "value": "f9ffdcf3-9ce5-47cf-bd93-647647f1f0de",
+      "domain": ".currents.dev",
+      "path": "/",
+      "expires": 1779544336,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "AMP_6d6952d6ff",
+      "value": "JTdCJTIyZGV2aWNlSWQlMjIlM0ElMjJlNzdjZTM3Ni1lMTBjLTRlZjYtOTE1Zi05MzU1NjJkYzYyZDAlMjIlMkMlMjJzZXNzaW9uSWQlMjIlM0ExNzU2MjE0MzMwMzY5JTJDJTIyb3B0T3V0JTIyJTNBZmFsc2UlMkMlMjJsYXN0RXZlbnRUaW1lJTIyJTNBMTc1NjIxNDMzNDg2NSUyQyUyMmxhc3RFdmVudElkJTIyJTNBMyUyQyUyMnBhZ2VDb3VudGVyJTIyJTNBMiU3RA==",
+      "domain": ".currents.dev",
+      "path": "/",
+      "expires": 1787750334,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "intercom-session-wqhxfxbv",
+      "value": "ZVRETE9NMDR3NzljeVlYQnJwL2xOanp0YW9qNEVzQ1RPWVB6bTJiSXd0TDJ5ODREbkwvSGdPV2RRbE1wOXFaODdVcENsM3hsaUorQTZ0eWExNFEyZStDYjNPc0JCNW8vOHZOeGdqemtoMkk9LS1nRmxIc1BDZUZDQUtUQWtWem8zTXpRPT0=--3d0b96ef291ba53ec278167090ff3dd37a53108f",
+      "domain": ".currents.dev",
+      "path": "/",
+      "expires": 1756819136,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "__Host-featurebase-csrf-token",
+      "value": "8e24127084a3afc264ea5aa47d75de45823599dd1a56364379e1520b48aa097ddc97d1e9369193cc796ddef2d1ea26a602fc617ef474dc0ffdd37307398763e416bbbc6f30610b4bb308237b73a3a04f9122303e182b8bc282ba664ddfd7b84f9c94b9b37217020e282a1e3891c14ad2a68da46997f8eeee558263bd5e8a7ba7%7C023ca2a6a164c01f85ee80b6e4ef35adb8c83c60d95304695257d67ba3863b26",
+      "domain": "currents.featurebase.app",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    }
+  ],
+  "origins": [
+    {
+      "origin": "https://app-staging.currents.dev",
+      "localStorage": [
+        {
+          "name": "intercom.intercom-state",
+          "value": "{\"app\":{\"openConfig\":{\"layout\":\"default\",\"unifiedStyling\":true,\"openTo\":\"home\",\"spaces\":[{\"type\":\"home\",\"label\":\"Home\",\"navigationLabel\":\"Home\",\"badge\":null},{\"type\":\"messages\",\"label\":\"Messages\",\"navigationLabel\":\"Messages\",\"badge\":null},{\"type\":\"tickets\",\"label\":\"Tickets\",\"navigationLabel\":\"Tickets\",\"badge\":null},{\"type\":\"help\",\"label\":\"Help\",\"navigationLabel\":\"Help\",\"badge\":null}],\"userHasReceivedChecklists\":false,\"userHasLiveNewsfeed\":false,\"userHasTickets\":false},\"selfServeSuggestionsMatch\":false,\"name\":\"Currents.dev [TEST]\",\"features\":{\"anonymousInboundMessages\":true,\"googleAnalytics\":false,\"hubspotInstalled\":false,\"inboundMessages\":true,\"marketoEnrichmentInstalled\":false,\"googleAnalytics4Integration\":true},\"helpCenterSiteUrl\":\"https://intercom.help/currentsdev-test\",\"inboundConversationsDisabled\":false,\"isDeveloperWorkspace\":false,\"customGoogleAnalyticsTrackerId\":null},\"launcher\":{\"isLauncherEnabled\":true},\"launcherDiscoveryMode\":{\"hasDiscoveredLauncher\":true},\"launcherSettings\":{\"alignment\":\"right\",\"color\":\"#333333\",\"colorDark\":\"#9b9b9b\",\"hasRequiredFeatures\":true,\"horizontalPadding\":20,\"instantBootEnabled\":true,\"launcherLogoUrl\":null,\"launcherLogoDarkUrl\":null,\"secondaryColor\":\"#ff6666\",\"secondaryColorDark\":\"#ff6666\",\"showLauncher\":true,\"themeMode\":\"light\",\"updatedAt\":1756142099,\"verticalPadding\":20,\"isLoading\":false},\"user\":{\"role\":\"user\",\"locale\":\"en\",\"hasConversations\":true},\"message\":{},\"conversations\":{\"byId\":{}},\"openOnBoot\":{\"type\":null,\"metadata\":{},\"lastOpenAtTimestamp\":1756214342278},\"operator\":{\"lastComposerEvent\":0},\"router\":{\"isInitialized\":false,\"navigationQueue\":[]}}"
+        },
+        {
+          "name": "CognitoIdentityServiceProvider.7rk6o0ncidfc3s9mkbdb3em0ph.2a689622-9a65-46d2-99a5-532820ee4ed7.idToken",
+          "value": "eyJraWQiOiJJVlhES0krSElaTDNoN1dQeEFYUUlkWGdBeFFnRE1YZjE0bWEwSlZpMzlJPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiIyYTY4OTYyMi05YTY1LTQ2ZDItOTlhNS01MzI4MjBlZTRlZDciLCJhdWQiOiI3cms2bzBuY2lkZmMzczlta2JkYjNlbTBwaCIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJldmVudF9pZCI6IjAwMDk4MjhhLTE2OGItNGUxNy04MmRmLWYyNjI5ZDk2NTczNyIsInRva2VuX3VzZSI6ImlkIiwiYXV0aF90aW1lIjoxNzU2MjE0MzMzLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV93Yk96QkFsUU4iLCJjb2duaXRvOnVzZXJuYW1lIjoiMmE2ODk2MjItOWE2NS00NmQyLTk5YTUtNTMyODIwZWU0ZWQ3IiwiZXhwIjoxNzU2MjE0NjMzLCJpYXQiOjE3NTYyMTQzMzMsImVtYWlsIjoieW9oYXkuYXJjaEBnbWFpbC5jb20ifQ.CEAYf_9-JtdPFJJB6481gsr-ZtXmGyP7T7sEmLeqDT1GExrwBa9Xt3W9nXeX9GF18azCMSxmLL7qEPZGB68XfJyhz5pJ9_yuviSbUC0W5lAIT_sc7JkVZoJuIumw4iuDkGvFlEUWT57uirVjiA-jFpf1Q8GR9dqEgknV2jnZ37haFhSzitSd5M_VPu8wE4mrs4EDJO19ji5ooaYgIbAd3OLjH76EgiyR61sav2tMFru624W6JaefF5fMsD0efgGe_QoT6EHhYWFXvUnv-I9qj3-zbFlP9Vp8pigFYOQJxDsdj-yCm8To0msR97u2zpMm5wElVNnyPCpbckGeyI7PMA"
+        },
+        {
+          "name": "CognitoIdentityServiceProvider.7rk6o0ncidfc3s9mkbdb3em0ph.LastAuthUser",
+          "value": "2a689622-9a65-46d2-99a5-532820ee4ed7"
+        },
+        {
+          "name": "sorry:redirect_after_login",
+          "value": "null"
+        },
+        {
+          "name": "CognitoIdentityServiceProvider.7rk6o0ncidfc3s9mkbdb3em0ph.2a689622-9a65-46d2-99a5-532820ee4ed7.clockDrift",
+          "value": "0"
+        },
+        {
+          "name": "amplify-signin-with-hostedUI",
+          "value": "false"
+        },
+        {
+          "name": "CognitoIdentityServiceProvider.7rk6o0ncidfc3s9mkbdb3em0ph.2a689622-9a65-46d2-99a5-532820ee4ed7.accessToken",
+          "value": "eyJraWQiOiJ4STZEdHUyalNVcGVHelcrUTJHRWtDdE9mb0s2dkJDdEhsY2F3K2p0U1lRPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiIyYTY4OTYyMi05YTY1LTQ2ZDItOTlhNS01MzI4MjBlZTRlZDciLCJkZXZpY2Vfa2V5IjoidXMtZWFzdC0xXzU2NDljYmViLTdjYzgtNDFhYS1hZWRiLTQ2NWYwZTE3YjI4NCIsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC51cy1lYXN0LTEuYW1hem9uYXdzLmNvbVwvdXMtZWFzdC0xX3diT3pCQWxRTiIsImNsaWVudF9pZCI6IjdyazZvMG5jaWRmYzNzOW1rYmRiM2VtMHBoIiwiZXZlbnRfaWQiOiIwMDA5ODI4YS0xNjhiLTRlMTctODJkZi1mMjYyOWQ5NjU3MzciLCJ0b2tlbl91c2UiOiJhY2Nlc3MiLCJzY29wZSI6ImF3cy5jb2duaXRvLnNpZ25pbi51c2VyLmFkbWluIiwiYXV0aF90aW1lIjoxNzU2MjE0MzMzLCJleHAiOjE3NTYyMTQ2MzMsImlhdCI6MTc1NjIxNDMzMywianRpIjoiOTZmMTUxMjUtMjRhMC00NTdmLThlNGQtNDJjMmJkYTQzZDgwIiwidXNlcm5hbWUiOiIyYTY4OTYyMi05YTY1LTQ2ZDItOTlhNS01MzI4MjBlZTRlZDcifQ.D4JxcujcutnteOye-Y1OJUWyj-s6ymq7YXNgjYimOvrEdz2ZCUBl00k4qD4BUQ4Z7iS1R9R_cnVOF3WJJoJQyhKZLq2Y1MV7nJU9mahmKmsZY81AL7pDchnVOX3do6q6EehKXeHyz4R52YX2QlEj49jnbzeXBejazvUO9PiPxWWBOkM6cLz941FjKM121rTboTNIkzHWEe2PqpaPVLGG24r3Hviypc4MKNd1AxKyGzP4EF9i_HEdDktuXMviq1c9DE5tmiR3uqsyImDaf8SP_FycuNslSjQOGx4lZdLCCl646GVOjkmwsFyXIpyu1R4iwklN0l8NLNg5KB7m57h4hQ"
+        },
+        {
+          "name": "CognitoIdentityServiceProvider.7rk6o0ncidfc3s9mkbdb3em0ph.2a689622-9a65-46d2-99a5-532820ee4ed7.refreshToken",
+          "value": "eyJjdHkiOiJKV1QiLCJlbmMiOiJBMjU2R0NNIiwiYWxnIjoiUlNBLU9BRVAifQ.Ys3MdIPQxJx2SDHf9iEqzddrnf82lwFD99Xj_TXvxZWT9WpQthqnkmpjZq0JJjDrMQq9Rg9ryNyGiIhBmk8fp5-0mTZmgyL9AGYFX7fvw28IWUdbtpIIdreooh5WkWPR3Mkoiy7EAtyxcow8aZisi9E7s3ICaIEt0xnDVzPzhuNKb9tGQqHXUNVVBvgnI0hlTgtbKg4gg-VWxoT-U0xTbjnzjOma2RXAtXj6iBu-4wkupgVlyGGJmVtKMQZCOlurzQ_B0uI-i0Qf90NeZtx435Vri1P_4Ud-mcHputqjmc50Thyek2_fJxDKpVVJE-Fo7CkncPHWA4wcBllO4MxIGQ.w1r9evw65REDy6Uo.rQXT2tVzkgAr16aicoWAYA5i5Lkbtry8c20c8zLLqtSjIUp_mX5koaNDKSq3iVRQi4r7-jo8J0CJqLIvGK_ErYX8dXPg4_fjY4iuAEDck-5S5-0kB2lN6Md33fbOIGTE-afeGBGFyW9Mh_43MHO75F5tdyWL0ai2I23W-f1cwc-DB4NBuO4Tl_YgrGaL9RVNTTnfgHdz6buG4_1IZ2X5T1B9ryybhtO9NdrMc-bQ_Ihc3NHRLLUIbtGRQ2_2nfvcq_S0BSL9ykL-yHxkkrf1MHb0x2VX7lAgJSL0nelciwvTTzgKeso345zhq4CRyZ3kA1Vaq14i-HGNP0ypzuD2OSzUMymV5bkSECb9hNPFnpVxZLxdtjduZ4HY4sMY30pghaNljKCSueFj9YaZJyU4PIiW39BbDyX6AEeOJ4WcpVjKYv2yDwYE02TE0bgAyzUO6H5cX-HvlLe9pWWXPtqjmC8iG2OWdEJZnTljvT1bfDxddFNzfBXnl4Yc9_QEsgk3Erdb7DSr9JTbZ-97uNp3oQWfoV5EiSJdZRUTxHwTsmn4tRY6qSWJ0XSMq5n3DFjcoEjaAx06Js7kN6TJ7eY-7BUD6IRm7tmFHTejcTA_qmTC12awX-nd5yyQSM0EeJeMZZz3ayW6saNqHpnAW0v-8VdDXQ18XtS1bwVgL6MiVXawd2Ed-rEoX-wrVs-nj7Q0NZilJ3UBeGkgwxNtuP86imDsEeq2f-nE-U_60cKMPkz7TdjJYTOw3t5xAFcbffQnFQfXSxmFyR1Ve8oqHl-SdzO15f1hUFy6SX1ulvD65qmuuOFxZA-F82C3rS-EHqmuS6NAExh6Oo9uAihQ9VxV-fn7kBO4Gzee3Ws8fTSf-1PyT5NSuPsdp9Y8W4xRIbpOoPIjpsKCdUX4U7onm7OvpgxCJbpE4IqyVC_9vL2wW1p5hgqyXzxXqugcuFJMIIB4K2lA72d6uAwnSB3GWbNeNeujEEh14xcod8mWM2Mk3ZEu1HYAR0DVaBLI-dSEHXzw696CSIkuQgimyafdw7AeJPXBYSrdRsh1REM8RKd__Yri9UhUlsfROhxuZf7q9hmdgiHnTVIhmfoqOtKZMjEo-XmJNAnIlrtKU3I-mz2ap5i2dr8T09lGstYfa0K4rmeP2zthKtOcEMPQXR83vFrh9Bp2RVJeAfiVAvsGoCnlqGPU7SO6suvIz7FF__gR5jxtA7HfEpcSUvO-G1xNtpVZK7Ca2x8KspHsdxzywNYeH3lDSwV-CKh7BtbhVBYv08kFLHELQn_vk3QSC-MLbLAgxMdzH17qGCVZYOhEpY-3elNcmIpX3oAPZrCH8az4Qc3EyaP5inQb4RdwdY4sn4w0HcZY8eYpe4HBXunhItoD7XcigCuQj7ZZf5nDAoV0tMpbBrn56Bbh052QGg7xn32fSao9ek-oRhKRjLdRwEsc.9XE5vYLDMvoZ35gmkxa3Wg"
+        },
+        {
+          "name": "CognitoIdentityServiceProvider.7rk6o0ncidfc3s9mkbdb3em0ph.2a689622-9a65-46d2-99a5-532820ee4ed7.userData",
+          "value": "{\"UserAttributes\":[{\"Name\":\"sub\",\"Value\":\"2a689622-9a65-46d2-99a5-532820ee4ed7\"},{\"Name\":\"email_verified\",\"Value\":\"true\"},{\"Name\":\"email\",\"Value\":\"yohay.arch@gmail.com\"}],\"Username\":\"2a689622-9a65-46d2-99a5-532820ee4ed7\"}"
+        },
+        {
+          "name": "CognitoIdentityServiceProvider.7rk6o0ncidfc3s9mkbdb3em0ph.2a689622-9a65-46d2-99a5-532820ee4ed7.randomPasswordKey",
+          "value": "Fz1R98+8qhdt+PZrFlUHPw2oZhM9hgc39pkfKezvJllXldPB71RBFQ=="
+        },
+        {
+          "name": "CognitoIdentityServiceProvider.7rk6o0ncidfc3s9mkbdb3em0ph.2a689622-9a65-46d2-99a5-532820ee4ed7.deviceKey",
+          "value": "us-east-1_5649cbeb-7cc8-41aa-aedb-465f0e17b284"
+        },
+        {
+          "name": "CognitoIdentityServiceProvider.7rk6o0ncidfc3s9mkbdb3em0ph.2a689622-9a65-46d2-99a5-532820ee4ed7.deviceGroupKey",
+          "value": "-9cRPowbi"
+        },
+        {
+          "name": "AMP_unsent_6d6952d6ff",
+          "value": "[]"
+        },
+        {
+          "name": "featurebaseGlobalAuth",
+          "value": "{\"organization\":\"currents\"}"
+        },
+        {
+          "name": "FBVisitedChangelogsTracker-currents",
+          "value": "{\"shownChangelogs\":[\"68828498bcbc0c4a33024afc\",\"68656c8eec3cf7717a37ee66\",\"6838e4957fe161e85785b8d1\",\"6830ded4db363661685e4e0d\",\"6824412529575eaf6168503e\",\"680bb81203e95300869b3619\",\"67febb26c952140a23b48dd8\"],\"unviewedChangelogs\":[]}"
+        }
+      ]
+    }
+  ]
+}

@@ -1,6 +1,7 @@
 import { CurrentsFixtures, CurrentsWorkerFixtures } from "@currents/playwright";
 import { defineConfig, devices } from "@playwright/test";
 
+
 const config = defineConfig<CurrentsFixtures, CurrentsWorkerFixtures>({
   timeout: 10 * 1000,
 
@@ -13,8 +14,9 @@ const config = defineConfig<CurrentsFixtures, CurrentsWorkerFixtures>({
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 1 : undefined,
-
+  // globalSetup: require.resolve("./global-setup"),
   use: {
+    // storageState: "storageState.json",
     actionTimeout: 0,
     trace: "on",
     video: "on",
@@ -25,14 +27,14 @@ const config = defineConfig<CurrentsFixtures, CurrentsWorkerFixtures>({
 
   projects: [
     {
-      name: "Project A",
+      name: "ProjectA",
       retries: 2,
       use: {
         ...devices["Desktop Chrome"],
       },
     },
     {
-      name: "Project B",
+      name: "ProjectB",
       retries: 2,
       use: {
         ...devices["Desktop Chrome"],
