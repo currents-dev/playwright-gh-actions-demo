@@ -1,3 +1,8 @@
+> **⚠️ ARCHIVED REPOSITORY**
+>
+> This repository is now archived and read-only. For the latest examples and updates, please visit our new repository:
+> [**https://github.com/currents-dev/new-examples**](https://github.com/currents-dev/currents-examples/tree/main/playwright/ci/github-actions)
+
 # 🎭 Currents - Playwright - GitHub Actions
 
 This repository showcases running [Playwright](https://playwright.dev/) tests on GitHub Actions in parallel, while using [Currents](https://currents.dev) as the reporting dashboard.
